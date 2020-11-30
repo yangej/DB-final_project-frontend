@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex justify-center align-center">
+    <div class="container d-flex justify-center align-center py-16">
         <register-card></register-card>
     </div>
 </template>
