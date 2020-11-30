@@ -1,7 +1,9 @@
 <template>
-    <div>
+    <div style="padding-top: 100px; padding-bottom: 100px">
         <teacher-navbar></teacher-navbar>
-        <router-view></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view/>
+        </transition>
     </div>
 </template>
 
