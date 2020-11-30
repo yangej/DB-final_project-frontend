@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main class="accent d-flex align-center">
-      <transition name="fade-transform" mode="out-in">
+      <transition name="fade" mode="out-in">
         <router-view/>
       </transition>
     </v-main>
@@ -18,6 +18,13 @@ export default {
 <style lang="scss">
 * {
   transition: 0.25s;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 .shadow {
