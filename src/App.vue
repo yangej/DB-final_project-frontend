@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="accent d-flex align-center">
       <transition name="fade-transform" mode="out-in">
         <router-view/>
       </transition>

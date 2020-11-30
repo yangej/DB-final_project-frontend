@@ -43,7 +43,7 @@
                 placeholder="請輸入您欲設定的密碼"
             ></v-text-field>
             <custom-button width="100%" text="註冊" @click="register"></custom-button>
-            <a class="d-block mt-7 font-weight-medium" @click="goTo('/login')">我已經有帳號了</a>
+            <a class="text-center d-block mt-7 font-weight-medium" @click="goTo('/')">我已經有帳號了</a>
         </div>
     </v-card>
 </template>
