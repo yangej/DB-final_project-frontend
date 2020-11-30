@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: 'StudentNavbar',
+        name: 'MainCard',
         props: {
             imgSrc: String,
             title: String,
