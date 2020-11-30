@@ -18,6 +18,7 @@ export default {
 <style lang="scss">
 * {
   transition: 0.25s;
+  letter-spacing: 0.1rem;
 }
 
 .fade-enter-active, .fade-leave-active {
