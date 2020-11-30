@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import RegisterCard from '../components/RegisterCard.vue'
+    import RegisterCard from '@/components/RegisterCard.vue'
 
     export default {
         name: 'Register',
