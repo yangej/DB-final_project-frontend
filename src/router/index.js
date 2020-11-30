@@ -2,7 +2,6 @@ import VueRouter from "vue-router";
 import StudentLayout from "@/layout/StudentLayout";
 import TeacherLayout from "@/layout/TeacherLayout";
 import Login from "@/views/Login";
-import Test from "@/views/test";
 import CourseList from "@/views/student/CourseList";
 import QuestionList from "@/views/student/QuestionList";
 import CourseManagement from "@/views/teacher/CourseManagement";
@@ -22,17 +21,13 @@ const routes = [
         redirect: '/student',
         children: [
             {
-                path: '/student',
-                name: 'StudentTest',
-                component: Test
-            },
-            {
                 path: '/course-list',
                 name: 'CourseList',
                 component: CourseList
             },
             {
                 path: '/questions/:id',
+                name: 'QuestionList',
                 component: QuestionList
             }
         ]
@@ -43,11 +38,6 @@ const routes = [
         component: TeacherLayout,
         redirect: '/teacher',
         children: [
-            {
-                path: '/teacher',
-                name: 'TeacherTest',
-                component: Test
-            },
             {
                 path: '/course-management',
                 name: 'CourseManagement',
