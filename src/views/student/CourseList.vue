@@ -13,7 +13,7 @@
                     :tag-text="course.week"
                     :title="course.title"
                     action-text="查看問題"
-                    @click-button="goTo(`/questions/${index + 1}`)"
+                    @click-button="goTo('QuestionList', index + 1, course.title)"
                 ></item-row>
             </template>
         </main-card>
@@ -34,8 +34,8 @@
             };
         },
         methods: {
-            goTo(path) {
-                this.$router.push(path);
+            goTo(name, id, title) {
+                this.$router.push({ name, params: { id, title } });
             }
         }
     }
