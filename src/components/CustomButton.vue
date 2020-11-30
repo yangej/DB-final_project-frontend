@@ -1,23 +1,13 @@
 <template>
-    <v-btn :width="width" color="primary" class="py-6" depressed @click="onClick">{{ text }}</v-btn>
+    <v-btn :width="width" color="primary" class="py-6" depressed>{{ text }}</v-btn>
 </template>
 
 <script>
     export default {
         name: 'CustomButton',
-        data() {
-            return {
-
-            }
-        },
         props: {
             text: String,
             width: String
-        },
-        methods: {
-            onClick() {
-                this.$emit('on-click');
-            }
         }
     }
 </script>
