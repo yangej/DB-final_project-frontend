@@ -7,7 +7,7 @@
             <span class=" font-weight-bold">{{ title }}</span>
         </v-col>
         <v-col cols="2" class="d-flex align-center">
-            <v-btn text>
+            <v-btn text @click="onClick">
                 <span class="text-right font-weight-medium body-1">{{ actionText }}</span>
                 <v-icon class="primary--text ml-2">mdi-chevron-right</v-icon>
             </v-btn>
@@ -22,6 +22,11 @@
             tagText: String,
             title: String,
             actionText: String
+        },
+        methods: {
+            onClick() {
+                this.$emit('click-button');
+            }
         }
     }
 </script>

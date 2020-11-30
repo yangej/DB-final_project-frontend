@@ -14,6 +14,7 @@
                         :tag-text="course.week"
                         :title="course.title"
                         action-text="查看問題"
+                        @click-button="goTo(`/questions/${index}`)"
                     ></item-row>
                 </div>
             </template>
@@ -33,6 +34,11 @@
             return {
                 courseList: mockCourseList
             };
+        },
+        methods: {
+            goTo(path) {
+                this.$router.push(path);
+            }
         }
     }
 </script>
