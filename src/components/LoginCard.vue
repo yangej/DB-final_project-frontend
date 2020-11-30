@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import CustomButton from "./CustomButton";
+import CustomButton from "./common/CustomButton";
 export default {
     name: 'LoginCard',
     components: { CustomButton },
