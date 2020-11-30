@@ -1,13 +1,14 @@
 import VueRouter from "vue-router";
-import StudentLayout from "../layout/StudentLayout";
-import TeacherLayout from "../layout/TeacherLayout";
-import Login from "../views/Login";
-import Register from "../views/Register";
-import Test from "../views/test";
-import CourseList from "../views/student/CourseList";
-import CourseManagement from "../views/teacher/CourseManagement";
-import StudentAnswer from "../views/teacher/StudentAnswer";
-import StudentList from "../views/teacher/StudentList";
+import StudentLayout from "@/layout/StudentLayout";
+import TeacherLayout from "@/layout/TeacherLayout";
+import Login from "@/views/Login";
+import Register from "@/views/Register";
+import Test from "@/views/test";
+import CourseList from "@/views/student/CourseList";
+import QuestionList from "@/views/student/QuestionList";
+import CourseManagement from "@/views/teacher/CourseManagement";
+import StudentAnswer from "@/views/teacher/StudentAnswer";
+import StudentList from "@/views/teacher/StudentList";
 
 const routes = [
     {
@@ -30,6 +31,10 @@ const routes = [
                 path: '/course-list',
                 name: 'CourseList',
                 component: CourseList
+            },
+            {
+                path: '/questions/:id',
+                component: QuestionList
             }
         ]
     },
@@ -65,6 +70,10 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register
+    },
+    {
+        path: '*',
+        redirect: '/',
     }
 ];
 const router = new VueRouter({ routes });
