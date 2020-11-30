@@ -10,6 +10,7 @@
             <div>
                 <question-row
                     v-for="(question, index) in questions"
+                    :readonly="true"
                     :key="`question-${index}`"
                     :question="question.question"
                     :options="question.options"
