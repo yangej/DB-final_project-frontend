@@ -1,15 +1,15 @@
 <template>
-    $END$
+    <div>
+        <teacher-navbar></teacher-navbar>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from "vue-property-decorator";
-
-    @Component({
-        components: {}
-    })
-    export default class TeacherLayout extends Vue {
-
+    import TeacherNavbar from "../components/navbars/TeacherNavbar.vue";
+    export default {
+        name: 'TeacherLayout',
+        components: { TeacherNavbar }
     }
 </script>
 
