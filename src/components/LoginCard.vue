@@ -1,20 +1,35 @@
 <script src="../../../homework"></script>
 <template>
-    <div class="card">
-        <div class="card-header">
+    <v-card min-width="400" class="card shadow py-16 px-10">
+        <div class="d-flex mb-10">
             <img class="icon" src="../assets/011-logout.svg" alt="login-icon">
-            <div class="header-text">
-                <h3>登入</h3>
+            <div class="my-auto pl-5 text-left">
+                <h3 class="headline font-weight-medium">登入</h3>
                 <p>請輸入您的帳號與密碼</p>
             </div>
         </div>
-        <div class="card-content">
-            <input type="text" placeholder="請輸入您的帳號">
-            <input type="text" placeholder="請輸入您的密碼">
-            <custom-button text="登入"></custom-button>
-            <a style="margin-top: 30px;" @click="goTo('/register')">我要註冊</a>
+        <div>
+            <v-text-field
+                label="Outlined"
+                hide-details
+                single-line
+                outlined
+                class="mb-4"
+                placeholder="請輸入您的帳號"
+            ></v-text-field>
+            <v-text-field
+                label="Outlined"
+                hide-details
+                type="password"
+                single-line
+                outlined
+                class="mb-10"
+                placeholder="請輸入您的密碼"
+            ></v-text-field>
+            <custom-button width="100%" text="登入"></custom-button>
+            <a class="d-block mt-7 font-weight-medium" @click="goTo('/register')">我要註冊</a>
         </div>
-    </div>
+    </v-card>
 </template>
 
 <script>
@@ -31,47 +46,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .card {
-        padding: 60px 50px 50px 50px;
-        background-color: #fff;
-        max-width: 480px;
-        box-shadow: var(--shadow);
-        border-radius: 5px;
-
-        .card-header {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-
-            .header-text {
-                padding-left: 40px;
-                p, h3 {
-                    padding: 0;
-                    margin: 0;
-                }
-                h3 {
-                    font-size: 28px;
-                }
-                text-align: left;
-            }
-        }
-    }
-    .card-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    input {
-        background-color: var(--bg);
-        padding: 20px;
-        width: calc(100% - 40px);
-        border-radius: 5px;
-        font-size: 16px;
-        border: none;
-        outline: none;
-        margin-bottom: 20px;
+    ::v-deep fieldset {
+        border: none !important;
+        background-color: #efefef;
     }
 </style>
