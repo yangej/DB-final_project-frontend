@@ -1,4 +1,3 @@
-<script src="../../../homework"></script>
 <template>
     <v-card min-width="400" class="card shadow py-16 px-10">
         <div class="d-flex mb-10">

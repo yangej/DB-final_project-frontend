@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container d-flex justify-center align-center">
         <login-card></login-card>
     </div>
 </template>
@@ -14,11 +14,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>
