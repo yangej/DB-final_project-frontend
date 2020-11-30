@@ -39,10 +39,24 @@
                 type="password"
                 single-line
                 outlined
-                class="mb-10"
+                class="mb-4"
                 v-model="password"
                 placeholder="請輸入您欲設定的密碼"
             ></v-text-field>
+            <v-radio-group
+                v-model="role"
+                class="mb-4"
+                row
+            >
+                <v-radio
+                    label="我是老師"
+                    value="teacher"
+                ></v-radio>
+                <v-radio
+                    label="我是學生"
+                    value="student"
+                ></v-radio>
+            </v-radio-group>
             <custom-button width="100%" text="註冊" @click="register"></custom-button>
             <a class="text-center d-block mt-7 font-weight-medium" @click="goTo('/')">我已經有帳號了</a>
         </div>
@@ -61,12 +75,13 @@
                 department: '',
                 account: '',
                 password: '',
-                showPopup: false
+                showPopup: false,
+                role: 'teacher'
             }
         },
         computed: {
             isFinished() {
-                return this.name && this.department && this.account && this.password;
+                return this.name && this.department && this.account && this.password && this.role;
             }
         },
         methods: {
