@@ -7,14 +7,14 @@
             img-src="/img/navigate.svg"
         >
             <template>
-                <div class="px-4">
-                    <item-list
+                <div class="px-5">
+                    <item-row
                         v-for="(course,index) in courseList"
                         :key="`course-${index}`"
                         :tag-text="course.week"
                         :title="course.title"
                         action-text="查看問題"
-                    ></item-list>
+                    ></item-row>
                 </div>
             </template>
         </main-card>
@@ -23,12 +23,12 @@
 
 <script>
     import MainCard from "@/components/common/MainCard";
-    import ItemList from "@/components/common/ItemList";
+    import ItemRow from "@/components/common/ItemRow";
     import { mockCourseList } from "@/dummies/courseList";
 
     export default {
         name: 'CourseList',
-        components: { MainCard, ItemList },
+        components: { MainCard, ItemRow },
         data() {
             return {
                 courseList: mockCourseList
