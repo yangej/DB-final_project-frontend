@@ -1,7 +1,7 @@
 <template>
     <v-card min-width="400" class="card shadow py-16 px-10">
         <div class="d-flex mb-10">
-            <img class="icon" src="../assets/login.svg" alt="login-icon">
+            <img class="icon" src="/img/login.svg" alt="login-icon">
             <div class="mt-6 pl-5 text-left">
                 <h3 class="display-1 mb-3 font-weight-medium">登入</h3>
                 <p>請輸入您的帳號與密碼</p>

@@ -1,7 +1,7 @@
 <template>
     <v-card min-width="400" class="card shadow py-16 px-10">
         <div class="d-flex flex-column align-center mb-10">
-            <img class="icon mb-4" src="../assets/register.svg" alt="login-icon">
+            <img class="icon mb-4" src="/img/register.svg" alt="login-icon">
             <h3 class="headline font-weight-medium">註冊</h3>
         </div>
         <div>
@@ -11,6 +11,7 @@
                 single-line
                 outlined
                 class="mb-4"
+
                 v-model="name"
                 placeholder="請輸入您的姓名"
             ></v-text-field>
