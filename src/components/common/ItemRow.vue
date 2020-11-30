@@ -1,14 +1,14 @@
 <template>
-    <v-row class="py-2 border align-center px-5">
+    <v-row class="py-2 border align-center">
         <v-col cols="2">
             <span class="primary--text font-weight-bold">{{ tagText }}</span>
         </v-col>
-        <v-col cols="8">
+        <v-col cols="7">
             <span class=" font-weight-bold">{{ title }}</span>
         </v-col>
-        <v-col cols="2" class="d-flex align-center">
+        <v-col cols="3" class="d-flex align-center justify-end">
             <v-btn text @click="onClick">
-                <span class="text-right font-weight-medium body-1">{{ actionText }}</span>
+                <span class="font-weight-medium body-1">{{ actionText }}</span>
                 <v-icon class="primary--text ml-2">mdi-chevron-right</v-icon>
             </v-btn>
         </v-col>
