@@ -26,13 +26,12 @@
                 placeholder="請輸入您的密碼"
             ></v-text-field>
             <custom-button width="100%" text="登入"></custom-button>
-            <a class="text-center d-block mt-7 font-weight-medium" @click="goTo('/register')">我要註冊</a>
         </div>
     </v-card>
 </template>
 
 <script>
-import CustomButton from "./common/CustomButton";
+import CustomButton from "@/components/common/CustomButton";
 export default {
     name: 'LoginCard',
     components: { CustomButton },
