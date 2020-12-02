@@ -11,7 +11,7 @@
         </router-link>
         <v-spacer/>
         <router-link class="white--text" to="/student/course-list">課堂回答</router-link>
-        <v-btn icon class="ml-10 white--text">
+        <v-btn icon class="ml-10 white--text" @click="logout">
             <v-icon>mdi-logout</v-icon>
         </v-btn>
     </v-app-bar>
@@ -20,5 +20,10 @@
 <script>
     export default {
         name: 'StudentNavbar',
+        methods: {
+            logout() {
+                //TODO: call api and logout
+            }
+        }
     }
 </script>
