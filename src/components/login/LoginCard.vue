@@ -8,6 +8,7 @@
         </div>
         <div>
             <v-text-field
+                v-model="account"
                 label="Outlined"
                 hide-details
                 single-line
@@ -16,6 +17,7 @@
                 placeholder="請輸入您的帳號"
             ></v-text-field>
             <v-text-field
+                v-model="password"
                 label="Outlined"
                 hide-details
                 type="password"
@@ -34,12 +36,15 @@ import CustomButton from "@/components/common/CustomButton";
 export default {
     name: 'LoginCard',
     components: { CustomButton },
+    data() {
+        return {
+            account: '',
+            password: ''
+        }
+    },
     methods: {
-        goTo (path) {
-            this.$router.push(path);
-        },
         login() {
-            //TODO: call api and login
+            this.$emit('login', { account: this.account, password: this.password })
         }
     }
 }
