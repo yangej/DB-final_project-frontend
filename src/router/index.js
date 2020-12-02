@@ -33,23 +33,23 @@ const routes = [
         ]
     },
     {
-        path: '',
+        path: '/teacher',
         name: 'TeacherLayout',
         component: TeacherLayout,
-        redirect: '/teacher',
+        redirect: '/teacher/course-management',
         children: [
             {
-                path: '/course-management',
+                path: '/teacher/course-management',
                 name: 'CourseManagement',
                 component: CourseManagement
             },
             {
-                path: '/question-management/:id',
+                path: '/teacher/question-management/:id',
                 name: 'QuestionManagement',
                 component: QuestionManagement
             },
             {
-                path: '/student-list',
+                path: '/teacher/student-list',
                 name: 'StudentList',
                 component: StudentList
             },
