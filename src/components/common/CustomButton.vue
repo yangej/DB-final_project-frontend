@@ -1,5 +1,5 @@
 <template>
-    <v-btn :width="width" color="primary" class="py-6" depressed>{{ text }}</v-btn>
+    <v-btn :width="width" color="primary" class="py-6" depressed v-on="$listeners">{{ text }}</v-btn>
 </template>
 
 <script>
