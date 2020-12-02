@@ -1,11 +1,10 @@
 <template>
     <v-card min-width="400" class="card shadow py-16 px-10">
-        <div class="d-flex mb-10">
-            <img class="icon" src="/img/login.svg" alt="login-icon">
-            <div class="mt-6 pl-5 text-left">
-                <h3 class="display-1 mb-3 font-weight-medium">登入</h3>
-                <p>請輸入您的帳號與密碼</p>
+        <div class="d-flex flex-column align-center mb-5">
+            <div class="logo primary d-flex justify-center align-center rounded-circle mb-5">
+                <img src="/img/logo.svg" alt="logo">
             </div>
+            <h3 class="display-1 mb-3 font-weight-medium primary--text">PaTrack</h3>
         </div>
         <div>
             <v-text-field
@@ -25,7 +24,7 @@
                 class="mb-10"
                 placeholder="請輸入您的密碼"
             ></v-text-field>
-            <custom-button width="100%" text="登入"></custom-button>
+            <custom-button width="100%" text="登入" @click="login"></custom-button>
         </div>
     </v-card>
 </template>
@@ -38,6 +37,9 @@ export default {
     methods: {
         goTo (path) {
             this.$router.push(path);
+        },
+        login() {
+            //TODO: call api and login
         }
     }
 }
@@ -47,5 +49,14 @@ export default {
     ::v-deep fieldset {
         border: none !important;
         background-color: #efefef;
+    }
+    .logo {
+        width: 100px;
+        height: 100px;
+
+        img {
+            width: 64px;
+            height: 64px;
+        }
     }
 </style>
