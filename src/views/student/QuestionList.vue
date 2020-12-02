@@ -42,11 +42,7 @@
                 title: '',
                 questions: mockqQuetions,
                 answers: [],
-            }
-        },
-        computed: {
-            isFinished() {
-                return this.answers.every((answer) => { return answer !== '' });
+                isFinished: false
             }
         },
         methods: {
@@ -55,8 +51,13 @@
             },
             updateValue(value, index) {
                 this.answers[index] = value;
+                this.checkAnswers();
+            },
+            checkAnswers() {
+                this.isFinished = this.answers.every((answer) => answer != '');
             },
             send() {
+                console.log('submit!');
                 //TODO: call api
             }
         },
