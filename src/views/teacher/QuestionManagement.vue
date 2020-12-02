@@ -22,6 +22,8 @@
                 <custom-button
                     text="送出問題"
                     width="130"
+                    :disabled="isSent"
+                    @click="send"
                 ></custom-button>
             </div>
         </div>
@@ -32,7 +34,7 @@
     import BackCard from "@/components/common/BackCard";
     import QuestionRow from "@/components/common/QuestionRow";
     import CustomButton from "@/components/common/CustomButton";
-    import { mockqQuetions } from "../../dummies/questions";
+    import { mockQuestions } from "../../dummies/questions";
 
     export default {
         name: 'QuestionManagement',
@@ -40,18 +42,33 @@
         data() {
             return {
                 week: '',
-                title: '',
-                questions: mockqQuetions
+                id: 0,
+                isSent: false
             };
+        },
+        computed: {
+            title() {
+                // TODO: replace with data and call api
+                return mockQuestions[this.id - 1].lesson;
+            },
+            questions() {
+                // TODO: replace with data and call api
+                return mockQuestions[this.id - 1].questions;
+            }
         },
         methods: {
             goTo(path) {
                 this.$router.push(path);
+            },
+            send() {
+                console.log('send!');
+                this.isSent = true;
+                // TODO: inform db to send questions
             }
         },
         mounted() {
-            this.week = `Week ${this.$route.params.id}`;
-            this.title = this.$route.params.title; // TODO: this needs api to get it
+            this.id = this.$route.params.id;
+            this.week = `Week ${this.id}`;
         }
     };
 </script>

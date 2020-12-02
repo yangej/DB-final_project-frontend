@@ -31,18 +31,27 @@
     import BackCard from "@/components/common/BackCard";
     import QuestionRow from "@/components/common/QuestionRow";
     import CustomButton from "@/components/common/CustomButton";
-    import { mockqQuetions } from "../../dummies/questions";
+    import { mockQuestions } from "../../dummies/questions";
 
     export default {
         name: 'QuestionList',
         components: { BackCard, QuestionRow, CustomButton },
         data() {
             return {
+                id: 0,
                 week: '',
-                title: '',
-                questions: mockqQuetions,
                 answers: [],
                 isFinished: false
+            }
+        },
+        computed: {
+            title() {
+                // TODO: replace with data and call api
+                return mockQuestions[this.id - 1].lesson;
+            },
+            questions() {
+                // TODO: replace with data and call api
+                return mockQuestions[this.id - 1].questions;
             }
         },
         methods: {
@@ -62,8 +71,8 @@
             }
         },
         mounted() {
-            this.week = `Week ${this.$route.params.id}`;
-            this.title = this.$route.params.title; // TODO: this needs api to get it
+            this.id = this.$route.params.id;
+            this.week = `Week ${this.id}`;
             this.answers = Array(this.questions.length).fill('');
         }
     };
