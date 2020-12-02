@@ -33,7 +33,7 @@ const routes = [
         ]
     },
     {
-        path: '',
+        path: '123',
         name: 'TeacherLayout',
         component: TeacherLayout,
         redirect: '/teacher',
