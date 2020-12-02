@@ -15,41 +15,41 @@ const routes = [
         component: Login
     },
     {
-        path: '',
+        path: '/student',
         name: 'StudentLayout',
         component: StudentLayout,
-        redirect: '/student',
+        redirect: '/student/course-list',
         children: [
             {
-                path: '/course-list',
+                path: '/student/course-list',
                 name: 'CourseList',
                 component: CourseList
             },
             {
-                path: '/questions/:id',
+                path: '/student/questions/:id',
                 name: 'QuestionList',
                 component: QuestionList
             }
         ]
     },
     {
-        path: '',
+        path: '/teacher',
         name: 'TeacherLayout',
         component: TeacherLayout,
-        redirect: '/teacher',
+        redirect: '/teacher/course-management',
         children: [
             {
-                path: '/course-management',
+                path: '/teacher/course-management',
                 name: 'CourseManagement',
                 component: CourseManagement
             },
             {
-                path: '/question-management/:id',
+                path: '/teacher/question-management/:id',
                 name: 'QuestionManagement',
                 component: QuestionManagement
             },
             {
-                path: '/student-list',
+                path: '/teacher/student-list',
                 name: 'StudentList',
                 component: StudentList
             },
