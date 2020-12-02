@@ -2,7 +2,7 @@
     <back-card
             class="mx-auto"
             action-text="返回課堂回答"
-            @button-click="goTo('/course-list')"
+            @button-click="goTo('/student/course-list')"
     >
         <div class="pa-14">
             <p class="primary--text font-weight-bold ma-0">{{ week }}</p>

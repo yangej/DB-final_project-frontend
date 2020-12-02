@@ -15,18 +15,18 @@ const routes = [
         component: Login
     },
     {
-        path: '',
+        path: '/student',
         name: 'StudentLayout',
         component: StudentLayout,
-        redirect: '/student',
+        redirect: '/student/course-list',
         children: [
             {
-                path: '/course-list',
+                path: '/student/course-list',
                 name: 'CourseList',
                 component: CourseList
             },
             {
-                path: '/questions/:id',
+                path: '/student/questions/:id',
                 name: 'QuestionList',
                 component: QuestionList
             }
