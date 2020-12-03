@@ -1,6 +1,12 @@
 <template>
   <v-app>
     <v-main class="accent">
+      <popup
+        :show-popup="popup.showPopup"
+        :img-src="popup.imgSrc"
+        :popup-text="popup.popupText"
+        @close-popup="closePopup"
+      ></popup>
       <transition name="fade" mode="out-in">
         <router-view/>
       </transition>
@@ -9,9 +15,22 @@
 </template>
 
 <script>
+import Popup from '@/components/common/Popup';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'App',
+  components: { Popup },
+  computed: {
+    ...mapGetters({
+      popup: 'popup/options'
+    })
+  },
+  methods: {
+    ...mapActions({
+      closePopup: 'popup/closePopup'
+    })
+  }
 };
 </script>
 
