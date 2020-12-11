@@ -3,7 +3,7 @@ const config = require('../config/development_config');
 
 //進行token認證
 module.exports = function verifyToken(token) {
-    let tokenResult = "";
+    let tokenResult = '';
     const time = Math.floor(Date.now() / 1000);
     return new Promise((resolve, reject) => {
         //判斷token是否正確
@@ -18,10 +18,10 @@ module.exports = function verifyToken(token) {
                     resolve(tokenResult);
                     //若正確
                 } else {
-                    tokenResult = decoded.payload
+                    tokenResult = decoded.payload;
                     resolve(tokenResult);
                 }
-            })
+            });
         }
     });
-}
+};

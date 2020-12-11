@@ -10,28 +10,25 @@ let getDataMethod = new GetDataMethod();
 let updateUnitStateMethod = new UpdateUnitStateMethod();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  //console.log(req.body.test);
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+    //console.log(req.body.test);
+    res.render('index', { title: 'Express' });
 });
 
-router.post('/', function(req, res, next) {
-  console.log(req.body.test)
-    
+router.post('/', function (req, res, next) {
+    console.log(req.body.test);
 });
 
 router.post('/register', studentModifyMethod.postRegister);
 
 router.post('/login', studentModifyMethod.postLogin);
 
-router.post('/teacher/postquestion',updateUnitStateMethod.postUnitState);
+router.post('/teacher/postquestion', updateUnitStateMethod.postUnitState);
 
-router.get('/teacher/unit/getquestion',getDataMethod.getQuestion);
+router.get('/teacher/unit/getquestion', getDataMethod.getQuestion);
 
-router.get('/teacher/getunit',getDataMethod.getUnit);
+router.get('/teacher/getunit', getDataMethod.getUnit);
 
-router.get('/student/getquestion',getDataMethod.getQuestion);
-
-
+router.get('/student/getquestion', getDataMethod.getQuestion);
 
 module.exports = router;

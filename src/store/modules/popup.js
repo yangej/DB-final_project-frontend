@@ -1,13 +1,13 @@
-import { initialPopupState } from "../initialState/initialPopupState";
+import { initialPopupState } from '../initialState/initialPopupState';
 
 const state = () => initialPopupState();
 const getters = {
-    options: (state) => state.options
+    options: (state) => state.options,
 };
 const mutations = {
     UPDATE_POPUP(state, payload) {
         state.options = { ...state.popup, ...payload };
-    }
+    },
 };
 const actions = {
     updatePopup: ({ commit }, options) => {
@@ -15,7 +15,7 @@ const actions = {
     },
     closePopup: ({ commit }) => {
         commit('UPDATE_POPUP', { showPopup: false });
-    }
+    },
 };
 
 export const popup = {
@@ -23,5 +23,5 @@ export const popup = {
     state,
     getters,
     mutations,
-    actions
+    actions,
 };
