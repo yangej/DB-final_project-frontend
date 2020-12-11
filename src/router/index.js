@@ -1,18 +1,18 @@
-import VueRouter from "vue-router";
-import StudentLayout from "@/layout/StudentLayout";
-import TeacherLayout from "@/layout/TeacherLayout";
-import Login from "@/views/login/Login";
-import CourseList from "@/views/student/CourseList";
-import QuestionList from "@/views/student/QuestionList";
-import CourseManagement from "@/views/teacher/CourseManagement";
-import QuestionManagement from "@/views/teacher/QuestionManagement";
-import StudentList from "@/views/teacher/StudentList";
+import VueRouter from 'vue-router';
+import StudentLayout from '@/layout/StudentLayout';
+import TeacherLayout from '@/layout/TeacherLayout';
+import Login from '@/views/login/Login';
+import CourseList from '@/views/student/CourseList';
+import QuestionList from '@/views/student/QuestionList';
+import CourseManagement from '@/views/teacher/CourseManagement';
+import QuestionManagement from '@/views/teacher/QuestionManagement';
+import StudentList from '@/views/teacher/StudentList';
 
 const routes = [
     {
         path: '/',
         name: 'Login',
-        component: Login
+        component: Login,
     },
     {
         path: '/student',
@@ -23,14 +23,14 @@ const routes = [
             {
                 path: '/student/course-list',
                 name: 'CourseList',
-                component: CourseList
+                component: CourseList,
             },
             {
                 path: '/student/questions/:id',
                 name: 'QuestionList',
-                component: QuestionList
-            }
-        ]
+                component: QuestionList,
+            },
+        ],
     },
     {
         path: '/teacher',
@@ -41,24 +41,24 @@ const routes = [
             {
                 path: '/teacher/course-management',
                 name: 'CourseManagement',
-                component: CourseManagement
+                component: CourseManagement,
             },
             {
                 path: '/teacher/question-management/:id',
                 name: 'QuestionManagement',
-                component: QuestionManagement
+                component: QuestionManagement,
             },
             {
                 path: '/teacher/student-list',
                 name: 'StudentList',
-                component: StudentList
+                component: StudentList,
             },
-        ]
+        ],
     },
     {
         path: '*',
         redirect: '/',
-    }
+    },
 ];
 const router = new VueRouter({ routes });
 

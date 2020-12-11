@@ -3,11 +3,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'StudentList'
-    }
+export default {
+    name: 'StudentList',
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

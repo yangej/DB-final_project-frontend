@@ -4,7 +4,7 @@
             <span class="primary--text font-weight-bold">{{ tagText }}</span>
         </v-col>
         <v-col cols="7">
-            <span class=" font-weight-bold">{{ title }}</span>
+            <span class="font-weight-bold">{{ title }}</span>
         </v-col>
         <v-col cols="3" class="d-flex align-center justify-end">
             <v-btn text @click="onClick">
@@ -16,19 +16,19 @@
 </template>
 
 <script>
-    export default {
-        name: 'ItemRow',
-        props: {
-            tagText: String,
-            title: String,
-            actionText: String
+export default {
+    name: 'ItemRow',
+    props: {
+        tagText: String,
+        title: String,
+        actionText: String,
+    },
+    methods: {
+        onClick() {
+            this.$emit('click-button');
         },
-        methods: {
-            onClick() {
-                this.$emit('click-button');
-            }
-        }
-    }
+    },
+};
 </script>
 
 <style lang="scss" scoped>

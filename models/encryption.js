@@ -7,4 +7,4 @@ module.exports = function getRePassword(password) {
     const rePassword = hashPassword.digest('hex');
     //console.log('rePassword: ' + rePassword);
     return rePassword;
-}
+};

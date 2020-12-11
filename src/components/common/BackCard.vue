@@ -11,20 +11,20 @@
 </template>
 
 <script>
-    export default {
-        name: 'BackCard',
-        props: {
-            actionText: String,
+export default {
+    name: 'BackCard',
+    props: {
+        actionText: String,
+    },
+    methods: {
+        onClick() {
+            this.$emit('button-click');
         },
-        methods: {
-            onClick() {
-                this.$emit('button-click');
-            }
-        }
-    }
+    },
+};
 </script>
 <style lang="scss" scoped>
-    .border {
-        border-bottom: 1px solid #efefef;
-    }
+.border {
+    border-bottom: 1px solid #efefef;
+}
 </style>

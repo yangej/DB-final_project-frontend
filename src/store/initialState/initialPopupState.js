@@ -3,7 +3,7 @@ export const initialPopupState = () => {
         options: {
             showPopup: false,
             popupText: '',
-            imgSrc: ''
-        }
-    }
+            imgSrc: '',
+        },
+    };
 };

@@ -31,44 +31,44 @@
 </template>
 
 <script>
-    import BackCard from "@/components/common/BackCard";
-    import QuestionRow from "@/components/common/QuestionRow";
-    import CustomButton from "@/components/common/CustomButton";
-    import { mockQuestions } from "../../dummies/questions";
+import BackCard from '@/components/common/BackCard';
+import QuestionRow from '@/components/common/QuestionRow';
+import CustomButton from '@/components/common/CustomButton';
+import { mockQuestions } from '../../dummies/questions';
 
-    export default {
-        name: 'QuestionManagement',
-        components: { BackCard, QuestionRow, CustomButton },
-        data() {
-            return {
-                week: '',
-                id: 0,
-                isSent: false
-            };
+export default {
+    name: 'QuestionManagement',
+    components: { BackCard, QuestionRow, CustomButton },
+    data() {
+        return {
+            week: '',
+            id: 0,
+            isSent: false,
+        };
+    },
+    computed: {
+        title() {
+            // TODO: replace with data and call api
+            return mockQuestions[this.id - 1].lesson;
         },
-        computed: {
-            title() {
-                // TODO: replace with data and call api
-                return mockQuestions[this.id - 1].lesson;
-            },
-            questions() {
-                // TODO: replace with data and call api
-                return mockQuestions[this.id - 1].questions;
-            }
+        questions() {
+            // TODO: replace with data and call api
+            return mockQuestions[this.id - 1].questions;
         },
-        methods: {
-            goTo(path) {
-                this.$router.push(path);
-            },
-            send() {
-                console.log('send!');
-                this.isSent = true;
-                // TODO: inform db to send questions
-            }
+    },
+    methods: {
+        goTo(path) {
+            this.$router.push(path);
         },
-        mounted() {
-            this.id = this.$route.params.id;
-            this.week = `Week ${this.id}`;
-        }
-    };
+        send() {
+            console.log('send!');
+            this.isSent = true;
+            // TODO: inform db to send questions
+        },
+    },
+    mounted() {
+        this.id = this.$route.params.id;
+        this.week = `Week ${this.id}`;
+    },
+};
 </script>

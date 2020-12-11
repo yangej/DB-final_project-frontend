@@ -1,10 +1,14 @@
 <template>
     <v-card min-width="400" class="card shadow py-16 px-10">
         <div class="d-flex flex-column align-center mb-5">
-            <div class="logo primary d-flex justify-center align-center rounded-circle mb-5">
-                <img src="/img/logo.svg" alt="logo">
+            <div
+                class="logo primary d-flex justify-center align-center rounded-circle mb-5"
+            >
+                <img src="/img/logo.svg" alt="logo" />
             </div>
-            <h3 class="display-1 mb-3 font-weight-medium primary--text">PaTrack</h3>
+            <h3 class="display-1 mb-3 font-weight-medium primary--text">
+                PaTrack
+            </h3>
         </div>
         <div>
             <v-text-field
@@ -26,42 +30,49 @@
                 class="mb-10"
                 placeholder="請輸入您的密碼"
             ></v-text-field>
-            <custom-button width="100%" text="登入" @click="login"></custom-button>
+            <custom-button
+                width="100%"
+                text="登入"
+                @click="login"
+            ></custom-button>
         </div>
     </v-card>
 </template>
 
 <script>
-import CustomButton from "@/components/common/CustomButton";
+import CustomButton from '@/components/common/CustomButton';
 export default {
     name: 'LoginCard',
     components: { CustomButton },
     data() {
         return {
             account: '',
-            password: ''
-        }
+            password: '',
+        };
     },
     methods: {
         login() {
-            this.$emit('login', { account: this.account, password: this.password })
-        }
-    }
-}
+            this.$emit('login', {
+                account: this.account,
+                password: this.password,
+            });
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-    ::v-deep fieldset {
-        border: none !important;
-        background-color: #efefef;
-    }
-    .logo {
-        width: 100px;
-        height: 100px;
+::v-deep fieldset {
+    border: none !important;
+    background-color: #efefef;
+}
+.logo {
+    width: 100px;
+    height: 100px;
 
-        img {
-            width: 64px;
-            height: 64px;
-        }
+    img {
+        width: 64px;
+        height: 64px;
     }
+}
 </style>
