@@ -21,6 +21,7 @@
         "morgan": "~1.9.1",
         "mysql": "*",
         "vue": "^2.6.11",
+        "vue-eslint-parser": "^7.2.0",
         "vue-router": "^3.4.9",
         "vuetify": "^2.2.11",
         "vuex": "^3.6.0",
