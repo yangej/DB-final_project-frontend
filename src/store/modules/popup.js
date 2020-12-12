@@ -11,7 +11,7 @@ const mutations = {
 };
 const actions = {
     updatePopup: ({ commit }, options) => {
-        commit('UPDATE_POPUP', options);
+        commit('UPDATE_POPUP', { showPopup: true, ...options });
     },
     closePopup: ({ commit }) => {
         commit('UPDATE_POPUP', { showPopup: false });

@@ -8,7 +8,7 @@
         >
             <template>
                 <item-row
-                    v-for="(course, index) in courseList"
+                    v-for="(course, index) in courses"
                     :key="`course-${index}`"
                     :tag-text="course.week"
                     :title="course.title"
@@ -25,20 +25,24 @@
 <script>
 import MainCard from '@/components/common/MainCard';
 import ItemRow from '@/components/common/ItemRow';
-import { mockCourseList } from '@/dummies/courseList';
+import { apiExecutor } from '../../api';
 
 export default {
     name: 'CourseList',
     components: { MainCard, ItemRow },
     data() {
         return {
-            courseList: mockCourseList,
+            courses: [],
         };
     },
     methods: {
         goTo(name, id, title) {
             this.$router.push({ name, params: { id, title } });
         },
+    },
+    async created() {
+        const response = await apiExecutor.getAllCourses();
+        this.courses = response.data;
     },
 };
 </script>
