@@ -8,11 +8,11 @@ const apiFactory = function (axios) {
         getCourse(id) {
             return axios.get(`/courses/${id}`);
         },
-        getAllQuestions() {
-            return axios.get('/questions');
-        },
         getQuestion(id) {
             return axios.get(`/questions/${id}`);
+        },
+        setQuestionSent(id, isSent) {
+            return axios.post(`/send-questions/${id}`, isSent);
         },
         getAllStudents() {
             return axios.get('/students');
@@ -30,7 +30,7 @@ const apiFactory = function (axios) {
 };
 
 const config = {
-    baseURL: 'http://localhost:3000/api',
+    baseURL: '/api',
     headers: { 'Content-Type': 'application/json' },
 };
 
