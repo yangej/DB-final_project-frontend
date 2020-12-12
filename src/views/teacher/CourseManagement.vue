@@ -9,7 +9,7 @@
             <template>
                 <div class="px-5">
                     <item-row
-                        v-for="(course, index) in courseList"
+                        v-for="(course, index) in courses"
                         :key="`course-${index}`"
                         :tag-text="course.week"
                         :title="course.title"
@@ -27,14 +27,14 @@
 <script>
 import MainCard from '@/components/common/MainCard';
 import ItemRow from '@/components/common/ItemRow';
-import { mockCourseList } from '@/dummies/courseList';
+import { mockCourses } from '@/dummies/courseList';
 
 export default {
     name: 'CourseManagement',
     components: { MainCard, ItemRow },
     data() {
         return {
-            courseList: mockCourseList,
+            courses: mockCourses,
         };
     },
     methods: {

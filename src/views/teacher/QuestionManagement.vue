@@ -34,7 +34,7 @@
 import BackCard from '@/components/common/BackCard';
 import QuestionRow from '@/components/common/QuestionRow';
 import CustomButton from '@/components/common/CustomButton';
-import { mockQuestions } from '../../dummies/questions';
+import { mockQuestions } from '@/dummies/questions';
 
 export default {
     name: 'QuestionManagement',
