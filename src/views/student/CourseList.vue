@@ -25,15 +25,14 @@
 <script>
 import MainCard from '@/components/common/MainCard';
 import ItemRow from '@/components/common/ItemRow';
-import { mockCourses } from '@/dummies/courses';
-import { apiExecutor } from "../../api";
+import { apiExecutor } from '../../api';
 
 export default {
     name: 'CourseList',
     components: { MainCard, ItemRow },
     data() {
         return {
-            courses: mockCourses,
+            courses: [],
         };
     },
     methods: {
@@ -41,9 +40,10 @@ export default {
             this.$router.push({ name, params: { id, title } });
         },
     },
-    created() {
-        console.log(apiExecutor.getAllCourses());
-    }
+    async created() {
+        const response = await apiExecutor.getAllCourses();
+        this.courses = response.data;
+    },
 };
 </script>
 

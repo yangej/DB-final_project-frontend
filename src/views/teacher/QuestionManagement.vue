@@ -16,6 +16,7 @@
                     :options="question.options"
                     :answer="question.answer"
                     :analysis="question.analysis"
+                    :show-analysis="question.showAnalysis"
                 ></question-row>
             </div>
             <div class="d-flex justify-end">
@@ -34,7 +35,8 @@
 import BackCard from '@/components/common/BackCard';
 import QuestionRow from '@/components/common/QuestionRow';
 import CustomButton from '@/components/common/CustomButton';
-import { mockQuestions } from '@/dummies/questions';
+import { apiExecutor } from '../../api';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'QuestionManagement',
@@ -42,33 +44,38 @@ export default {
     data() {
         return {
             week: '',
+            title: '',
             id: 0,
             isSent: false,
+            questions: [],
         };
-    },
-    computed: {
-        title() {
-            // TODO: replace with data and call api
-            return mockQuestions[this.id - 1].lesson;
-        },
-        questions() {
-            // TODO: replace with data and call api
-            return mockQuestions[this.id - 1].questions;
-        },
     },
     methods: {
         goTo(path) {
             this.$router.push(path);
         },
         send() {
-            console.log('send!');
             this.isSent = true;
-            // TODO: inform db to send questions
+            apiExecutor.setQuestionSent(this.id, true);
+            this.updatePopup({
+                popupText: '送出成功',
+                imgSrc: '/img/selection.svg',
+            });
         },
+        ...mapActions({
+            updatePopup: 'popup/updatePopup',
+        }),
     },
-    mounted() {
+    async created() {
         this.id = this.$route.params.id;
         this.week = `Week ${this.id}`;
+
+        const response = await apiExecutor.getQuestion(this.id);
+        this.title = response.data.lesson;
+        this.questions = response.data.questions.map((question) => {
+            return { ...question, showAnalysis: true };
+        });
+        this.isSent = response.data.isSent;
     },
 };
 </script>

@@ -10,6 +10,9 @@
             <div>
                 <question-row
                     v-for="(question, index) in questions"
+                    :show-analysis="question.showAnalysis"
+                    :analysis="question.analysis"
+                    :answer="question.answer"
                     :readonly="false"
                     :key="`question-${index}`"
                     :question="question.question"
@@ -20,7 +23,7 @@
             <custom-button
                 text="送出回答"
                 width="130"
-                :disabled="!isFinished"
+                :disabled="!isFinished || isSent"
                 @click="send"
             ></custom-button>
         </div>
@@ -31,7 +34,8 @@
 import BackCard from '@/components/common/BackCard';
 import QuestionRow from '@/components/common/QuestionRow';
 import CustomButton from '@/components/common/CustomButton';
-import { mockQuestions } from '@/dummies/questions';
+import { apiExecutor } from '../../api';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'QuestionList',
@@ -40,18 +44,18 @@ export default {
         return {
             id: 0,
             week: '',
+            title: '',
             answers: [],
+            correctAnswer: [],
+            questions: [],
             isFinished: false,
+            isSent: false,
+            score: 0,
         };
     },
     computed: {
-        title() {
-            // TODO: replace with data and call api
-            return mockQuestions[this.id - 1].lesson;
-        },
-        questions() {
-            // TODO: replace with data and call api
-            return mockQuestions[this.id - 1].questions;
+        correctAnswers() {
+            return this.questions.map((question) => question.answer);
         },
     },
     methods: {
@@ -65,14 +69,44 @@ export default {
         checkAnswers() {
             this.isFinished = this.answers.every((answer) => answer != '');
         },
-        send() {
-            console.log('submit!');
-            //TODO: call api
+        countScore() {
+            const total = 100;
+            const scorePerQues = total / this.questions.length;
+            let tempScore = 0;
+
+            this.answers.forEach((answer, index) => {
+                if (answer === this.correctAnswers[index]) {
+                    tempScore += scorePerQues;
+                } else {
+                    this.questions[index].showAnalysis = true;
+                }
+            });
+
+            this.score = Math.floor(tempScore);
         },
+        async send() {
+            this.countScore();
+            await apiExecutor.submitAnswers(this.answers);
+            this.isSent = true;
+            this.updatePopup({
+                popupText: '送出成功',
+                imgSrc: '/img/correction.svg',
+            });
+        },
+        ...mapActions({
+            updatePopup: 'popup/updatePopup',
+        }),
     },
-    mounted() {
+    async created() {
         this.id = this.$route.params.id;
         this.week = `Week ${this.id}`;
+
+        const response = await apiExecutor.getQuestion(this.id);
+        this.questions = response.data.questions.map((question) => {
+            return { ...question, showAnalysis: false };
+        });
+        this.title = response.data.lesson;
+
         this.answers = Array(this.questions.length).fill('');
     },
 };

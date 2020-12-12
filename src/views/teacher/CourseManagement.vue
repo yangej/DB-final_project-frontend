@@ -27,20 +27,24 @@
 <script>
 import MainCard from '@/components/common/MainCard';
 import ItemRow from '@/components/common/ItemRow';
-import { mockCourses } from '@/dummies/courseList';
+import { apiExecutor } from '../../api';
 
 export default {
     name: 'CourseManagement',
     components: { MainCard, ItemRow },
     data() {
         return {
-            courses: mockCourses,
+            courses: [],
         };
     },
     methods: {
         goTo(name, id, title) {
             this.$router.push({ name, params: { id, title } });
         },
+    },
+    async created() {
+        const response = await apiExecutor.getAllCourses();
+        this.courses = response.data;
     },
 };
 </script>
