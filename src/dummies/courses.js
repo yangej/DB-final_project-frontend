@@ -1,4 +1,4 @@
-export const mockCourseList = [
+export const mockCourses = [
     {
         week: 'Week1',
         title: '資料庫介紹',
