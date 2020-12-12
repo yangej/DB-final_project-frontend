@@ -1,6 +1,7 @@
 export const mockQuestions = [
     {
         lesson: '資料庫介紹',
+        isSent: false,
         questions: [
             {
                 question: '請問下列何者與其他二者不同？',
@@ -27,6 +28,7 @@ export const mockQuestions = [
     },
     {
         lesson: '資料庫系統概覽',
+        isSent: false,
         questions: [
             {
                 question: '請問下列何者與其他二者不同？',
@@ -53,6 +55,7 @@ export const mockQuestions = [
     },
     {
         lesson: '關連式資料庫設計',
+        isSent: false,
         questions: [
             {
                 question: '請問下列何者與其他二者不同？',
