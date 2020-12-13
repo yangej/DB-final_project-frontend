@@ -4,14 +4,15 @@ import VueRouter from 'vue-router';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import { makeServer } from './mockApi/apiServer';
+import './router/permission';
+// import { makeServer } from './mockApi/apiServer';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-if (process.env.NODE_ENV === 'development') {
-    makeServer();
-}
+// if (process.env.NODE_ENV === 'development') {
+//     makeServer();
+// }
 
 new Vue({
     router,
