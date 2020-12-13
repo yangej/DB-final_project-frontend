@@ -85,13 +85,13 @@ export default {
             this.score = Math.floor(tempScore);
         },
         async send() {
-            this.countScore();
             await apiExecutor.submitAnswers(this.answers);
-            this.isSent = true;
             this.updatePopup({
                 popupText: '送出成功',
                 imgSrc: '/img/correction.svg',
             });
+            this.countScore();
+            this.isSent = true;
         },
         ...mapActions({
             updatePopup: 'popup/updatePopup',

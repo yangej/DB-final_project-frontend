@@ -5,9 +5,6 @@ const apiFactory = function (axios) {
         getAllCourses() {
             return axios.get('/courses');
         },
-        getCourse(id) {
-            return axios.get(`/courses/${id}`);
-        },
         getQuestion(id) {
             return axios.get(`/questions/${id}`);
         },
@@ -19,6 +16,9 @@ const apiFactory = function (axios) {
         },
         getStudent(id) {
             return axios.get(`/students/${id}`);
+        },
+        getScores(id) {
+            return axios.get(`/scores/${id}`);
         },
         login() {
             return axios.get('/login');

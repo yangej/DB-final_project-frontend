@@ -2,6 +2,7 @@ import { createServer } from 'miragejs';
 import { mockCourses } from '../dummies/courses';
 import { mockQuestions } from '../dummies/questions';
 import { mockStudents } from '../dummies/students';
+import { mockScores } from '../dummies/scores';
 
 export function makeServer() {
     let server = createServer({
@@ -12,6 +13,7 @@ export function makeServer() {
                 courses: mockCourses,
                 questions: mockQuestions,
                 students: mockStudents,
+                scores: mockScores,
                 answers: [],
             });
         },
@@ -21,10 +23,6 @@ export function makeServer() {
 
             this.get('/courses', (schema) => {
                 return schema.db.courses;
-            });
-
-            this.get('/courses/:id', (schema, request) => {
-                return schema.db.courses.find(request.params.id);
             });
 
             this.get('/questions', (schema) => {
@@ -57,6 +55,12 @@ export function makeServer() {
             this.post('/answers', (schema, request) => {
                 const answerReq = JSON.parse(request.requestBody);
                 return schema.db.answers.insert(answerReq);
+            });
+
+            this.get('/scores/:id', (schema, request) => {
+                return schema.db.scores.findBy({
+                    studentId: request.params.id,
+                });
             });
         },
     });
