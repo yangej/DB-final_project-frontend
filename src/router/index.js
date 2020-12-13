@@ -1,20 +1,11 @@
 import VueRouter from 'vue-router';
 import StudentLayout from '@/layout/StudentLayout';
 import TeacherLayout from '@/layout/TeacherLayout';
-import Login from '@/views/login/Login';
-import CourseList from '@/views/student/CourseList';
-import QuestionList from '@/views/student/QuestionList';
-import CourseManagement from '@/views/teacher/CourseManagement';
-import QuestionManagement from '@/views/teacher/QuestionManagement';
-import StudentList from '@/views/teacher/StudentList';
-import StudentDetail from '@/views/teacher/StudentDetail';
+import store from '../store';
 
-const routes = [
-    {
-        path: '/',
-        name: 'Login',
-        component: Login,
-    },
+const role = store.state.user.role;
+
+const studentRoutes = [
     {
         path: '/student',
         name: 'StudentLayout',
@@ -24,15 +15,18 @@ const routes = [
             {
                 path: '/student/course-list',
                 name: 'CourseList',
-                component: CourseList,
+                component: () => import('@/views/student/CourseList.vue'),
             },
             {
                 path: '/student/questions/:id',
                 name: 'QuestionList',
-                component: QuestionList,
+                component: () => import('@/views/student/QuestionList.vue'),
             },
         ],
     },
+];
+
+const teacherRoutes = [
     {
         path: '/teacher',
         name: 'TeacherLayout',
@@ -42,30 +36,52 @@ const routes = [
             {
                 path: '/teacher/course-management',
                 name: 'CourseManagement',
-                component: CourseManagement,
+                component: () => import('@/views/teacher/CourseManagement.vue'),
             },
             {
                 path: '/teacher/question-management/:id',
                 name: 'QuestionManagement',
-                component: QuestionManagement,
+                component: () =>
+                    import('@/views/teacher/QuestionManagement.vue'),
             },
             {
                 path: '/teacher/student-list',
                 name: 'StudentList',
-                component: StudentList,
+                component: () => import('@/views/teacher/StudentList.vue'),
             },
             {
                 path: '/teacher/student-detail/:id',
                 name: 'StudentDetail',
-                component: StudentDetail,
+                component: () => import('@/views/teacher/StudentDetail.vue'),
             },
         ],
     },
+];
+
+const roleRoutes = role === 'teacher' ? teacherRoutes : studentRoutes;
+const redirectPath = role ? `/${role}` : '/login';
+const routes = [
+    {
+        path: '/',
+        redirect: redirectPath,
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import('@/views/login/Login.vue'),
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () => import('@/views/login/Register.vue'),
+    },
     {
         path: '*',
-        redirect: '/',
+        redirect: `/${role}`,
     },
+    ...roleRoutes,
 ];
-const router = new VueRouter({ routes });
+
+const router = new VueRouter({ mode: 'history', routes });
 
 export default router;
