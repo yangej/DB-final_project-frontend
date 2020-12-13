@@ -1,11 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { popup } from './modules/popup';
+import { createStore } from '../plugins/store';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-    modules: { popup },
-});
-
+const store = createStore();
 export default store;
