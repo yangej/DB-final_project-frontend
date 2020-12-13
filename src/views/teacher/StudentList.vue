@@ -47,7 +47,7 @@
 
 <script>
 import MainCard from '@/components/common/MainCard';
-import { mockStudents } from '@/dummies/students';
+import { apiExecutor } from '../../api';
 
 export default {
     name: 'StudentList',
@@ -61,17 +61,20 @@ export default {
                 { text: '學號', value: 'id' },
                 { text: '姓名', value: 'name', sortable: false },
                 { text: '系所', value: 'department', sortable: false },
-                { text: '平均分數', value: 'avgScore' },
+                { text: '平均分數', value: 'average' },
                 { text: '操作', value: 'action', sortable: false },
             ],
-            students: mockStudents,
+            students: [],
         };
     },
     methods: {
         onClick(id) {
-            //TODO: route to detail page
-            console.log('clicked', id);
+            this.$router.push({ path: `/teacher/student-detail/${id}` });
         },
+    },
+    async created() {
+        const response = await apiExecutor.getAllStudents();
+        this.students = response.data;
     },
 };
 </script>
@@ -97,7 +100,7 @@ export default {
     background-color: #5bc88f;
 
     th {
-        padding: 24px 20px !important;
+        padding: 16px 20px !important;
         border-bottom: 1px solid #efefef !important;
         span,
         i {
@@ -115,6 +118,5 @@ export default {
     border-bottom: 1px solid #efefef !important;
     padding: 16px 20px !important;
     font-size: 16px !important;
-    font-weight: 500;
 }
 </style>
