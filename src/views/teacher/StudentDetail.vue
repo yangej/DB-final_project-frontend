@@ -5,35 +5,7 @@
         @button-click="goTo('/teacher/student-list')"
     >
         <div class="px-10 pt-10">
-            <v-row>
-                <v-col
-                    cols="9"
-                    class="d-flex justify-space-between pr-9 align-center"
-                >
-                    <div class="px-9">
-                        <h5 class="caption mb-2">學號</h5>
-                        <p class="body-1 font-weight-medium">{{ infos.id }}</p>
-                    </div>
-                    <div class="px-9">
-                        <h5 class="caption mb-2">姓名</h5>
-                        <p class="body-1 font-weight-medium">
-                            {{ infos.name }}
-                        </p>
-                    </div>
-                    <div class="px-9">
-                        <h5 class="caption mb-2">系所</h5>
-                        <p class="body-1 font-weight-medium">
-                            {{ infos.department }}
-                        </p>
-                    </div>
-                </v-col>
-                <v-col cols="3" class="pl-16 border-left">
-                    <h5 class="caption mb-2">平均分數</h5>
-                    <p class="display-3 font-weight-medium primary--text">
-                        {{ infos.average }}
-                    </p>
-                </v-col>
-            </v-row>
+            <student-info-row :infos="infos"></student-info-row>
         </div>
         <div class="pb-5 px-10">
             <score-line-chart :data="chartData"></score-line-chart>
@@ -51,12 +23,13 @@
 
 <script>
 import BackCard from '@/components/common/BackCard';
+import StudentInfoRow from '@/components/teacher/StudentInfoRow';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
 import { apiExecutor } from '@/api';
 
 export default {
     name: 'StudentDetail',
-    components: { BackCard, ScoreLineChart },
+    components: { BackCard, ScoreLineChart, StudentInfoRow },
     data() {
         return {
             infos: {},
