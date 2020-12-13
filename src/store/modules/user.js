@@ -17,6 +17,9 @@ const mutations = {
     REMOVE_TOKEN(state) {
         state.token = null;
     },
+    REMOVE_ROLE(state) {
+        state.role = null;
+    },
 };
 
 const actions = {
