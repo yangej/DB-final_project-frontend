@@ -7,6 +7,7 @@ import QuestionList from '@/views/student/QuestionList';
 import CourseManagement from '@/views/teacher/CourseManagement';
 import QuestionManagement from '@/views/teacher/QuestionManagement';
 import StudentList from '@/views/teacher/StudentList';
+import StudentDetail from '@/views/teacher/StudentDetail';
 
 const routes = [
     {
@@ -52,6 +53,11 @@ const routes = [
                 path: '/teacher/student-list',
                 name: 'StudentList',
                 component: StudentList,
+            },
+            {
+                path: '/teacher/student-detail/:id',
+                name: 'StudentDetail',
+                component: StudentDetail,
             },
         ],
     },
