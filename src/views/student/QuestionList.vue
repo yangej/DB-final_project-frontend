@@ -5,7 +5,7 @@
         @button-click="goTo('/student/course-list')"
     >
         <div class="pa-14">
-            <p class="primary--text font-weight-bold ma-0">{{ week }}</p>
+            <p class="primary--text font-weight-bold ma-0">{{ unit }}</p>
             <h3 class="headline font-weight-medium mb-7">{{ title }}</h3>
             <div>
                 <question-row
@@ -43,7 +43,7 @@ export default {
     data() {
         return {
             id: 0,
-            week: '',
+            unit: '',
             title: '',
             answers: [],
             correctAnswer: [],
@@ -99,13 +99,13 @@ export default {
     },
     async created() {
         this.id = this.$route.params.id;
-        this.week = `Week ${this.id}`;
 
         const response = await apiExecutor.getQuestion(this.id);
         this.questions = response.data.questions.map((question) => {
             return { ...question, showAnalysis: false };
         });
-        this.title = response.data.lesson;
+        this.unit = response.data.unit;
+        this.title = response.data.unitName;
 
         this.answers = Array(this.questions.length).fill('');
     },
