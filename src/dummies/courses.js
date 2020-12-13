@@ -1,14 +1,14 @@
 export const mockCourses = [
     {
-        week: 'Week1',
-        title: '資料庫介紹',
+        unit: 'Lesson1',
+        unitName: '資料庫介紹',
     },
     {
-        week: 'Week2',
-        title: '資料庫系統概覽',
+        unit: 'Lesson2',
+        unitName: '資料庫系統概覽',
     },
     {
-        week: 'Week3',
-        title: '關連式資料庫設計',
+        unit: 'Lesson3',
+        unitName: '關連式資料庫設計',
     },
 ];

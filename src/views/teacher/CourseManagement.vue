@@ -11,11 +11,11 @@
                     <item-row
                         v-for="(course, index) in courses"
                         :key="`course-${index}`"
-                        :tag-text="course.week"
-                        :title="course.title"
+                        :tag-text="course.unit"
+                        :title="course.unitName"
                         action-text="管理問題"
                         @click-button="
-                            goTo('QuestionManagement', index + 1, course.title)
+                            goTo('QuestionManagement', course.id, course.title)
                         "
                     ></item-row>
                 </div>
