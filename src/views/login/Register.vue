@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { apiExecutor } from '../../api';
 import RegisterCard from '@/components/login/RegisterCard.vue';
 
 export default {
@@ -15,14 +15,8 @@ export default {
     },
     methods: {
         async register(values) {
-            // TODO: call api and login
-            const axiosInstance = axios.create({
-                baseURL: 'http://localhost:5000',
-                'Content-Type': 'application/json',
-            });
-            console.log(values);
-            const res = await axiosInstance.post('/register', values);
-            console.log(res);
+            await apiExecutor.register(values);
+            await this.$router.push('/login');
         },
     },
 };
