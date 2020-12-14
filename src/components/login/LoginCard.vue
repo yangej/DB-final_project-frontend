@@ -27,7 +27,7 @@
                 type="password"
                 single-line
                 outlined
-                class="mb-10"
+                class="mb-7"
                 placeholder="請輸入您的密碼"
             ></v-text-field>
             <custom-button
@@ -35,6 +35,9 @@
                 text="登入"
                 @click="login"
             ></custom-button>
+            <router-link class="d-block mt-7 text-center" to="/register"
+                >註冊帳號</router-link
+            >
         </div>
     </v-card>
 </template>
