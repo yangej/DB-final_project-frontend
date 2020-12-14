@@ -13,9 +13,7 @@
                     :tag-text="course.unit"
                     :title="course.unitName"
                     action-text="查看問題"
-                    @click-button="
-                        goTo('QuestionList', course.id, course.title)
-                    "
+                    @click-button="goTo('QuestionList', course.id)"
                 ></item-row>
             </template>
         </main-card>
@@ -39,10 +37,15 @@ export default {
         goTo(name, id, title) {
             this.$router.push({ name, params: { id, title } });
         },
+        formatCourse(response) {
+            return response.map((unit) => {
+                return { unit: 'Unit ' + unit.id, unitName: unit.name };
+            });
+        },
     },
     async created() {
-        const response = await apiExecutor.getAllCourses();
-        this.courses = response.data;
+        const response = await apiExecutor.getAllUnits();
+        this.courses = this.formatCourse(response.result);
     },
 };
 </script>
