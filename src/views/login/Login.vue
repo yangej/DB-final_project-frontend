@@ -6,7 +6,7 @@
 
 <script>
 import LoginCard from '@/components/login/LoginCard.vue';
-import axios from 'axios';
+import { apiExecutor } from '../../api';
 import { mapActions } from 'vuex';
 
 export default {
@@ -16,12 +16,8 @@ export default {
     },
     methods: {
         async login(values) {
-            const axiosInstance = axios.create({
-                baseURL: 'http://localhost:5000',
-                'Content-Type': 'application/json',
-            });
-            const res = await axiosInstance.post('/login', values);
-            const result = res.data.result;
+            const response = await apiExecutor.login(values);
+            const result = response.result;
             this.setLoginInfos({ token: result.token, role: result.identity });
 
             this.$router.push({ path: `/${result.identity}` });
