@@ -24,10 +24,12 @@ const mutations = {
 
 const actions = {
     login: ({ commit }, { token, role }) => {
+        localStorage.setItem('token', token);
         commit('SET_TOKEN', token);
         commit('SET_ROLE', role);
     },
     logout: ({ commit }) => {
+        localStorage.removeItem('token');
         commit('REMOVE_TOKEN');
         commit('REMOVE_ROLE');
     },
