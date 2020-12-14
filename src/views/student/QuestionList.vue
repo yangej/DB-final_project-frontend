@@ -101,11 +101,13 @@ export default {
         this.id = this.$route.params.id;
 
         const response = await apiExecutor.getQuestion(this.id);
-        this.questions = response.data.questions.map((question) => {
+        console.log(response);
+        // TODO: get wrong response, an empty array returned!
+        this.questions = response.questions.map((question) => {
             return { ...question, showAnalysis: false };
         });
-        this.unit = response.data.unit;
-        this.title = response.data.unitName;
+        this.unit = response.unit;
+        this.title = response.unitName;
 
         this.answers = Array(this.questions.length).fill('');
     },
