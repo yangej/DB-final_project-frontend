@@ -24,6 +24,9 @@ const apiFactory = function (axios) {
         login(loginInfos) {
             return axios.post('/login', loginInfos);
         },
+        register(registerInfos) {
+            return axios.post('/register', registerInfos);
+        },
         // submitAnswers(answerInfos) {
         //     return axios.post('/answers', answerInfos);
         // },
