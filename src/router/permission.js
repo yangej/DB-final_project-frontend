@@ -9,6 +9,8 @@ const routerHook = async (to, from, next) => {
     if (hasToken) {
         if (to.path === '/login') {
             next(`/${role}`);
+        } else if (to.path === '/') {
+            next(`/${role}`);
         } else {
             next();
         }
