@@ -11,15 +11,6 @@
             </h3>
         </div>
         <div>
-            <v-text-field
-                v-model="name"
-                label="Outlined"
-                hide-details
-                single-line
-                outlined
-                class="mb-4"
-                placeholder="請輸入您的姓名"
-            ></v-text-field>
             <v-select
                 v-model="department"
                 :items="departments"
@@ -29,13 +20,22 @@
                 outlined
             ></v-select>
             <v-text-field
+                v-model="name"
+                label="Outlined"
+                hide-details
+                single-line
+                outlined
+                class="mb-4"
+                placeholder="請輸入您的姓名"
+            ></v-text-field>
+            <v-text-field
                 v-model="account"
                 label="Outlined"
                 hide-details
                 single-line
                 outlined
                 class="mb-4"
-                placeholder="請輸入您的帳號"
+                placeholder="請輸入您的學號"
             ></v-text-field>
             <v-text-field
                 v-model="password"
