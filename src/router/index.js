@@ -81,9 +81,14 @@ const routes = [
         redirect: '/dev/question-overview',
         children: [
             {
-                path: '/dev/question-overview',
-                name: 'QuestionOverview',
-                component: () => import('@/views/teacher/QuestionOverview.vue'),
+                path: '/dev/unit-overview',
+                name: 'UnitOverview',
+                component: () => import('@/views/teacher/UnitOverview.vue'),
+            },
+            {
+                path: '/dev/question-answers',
+                name: 'QuestionAnswers',
+                component: () => import('@/views/teacher/QuestionAnswers.vue'),
             },
         ],
     },
