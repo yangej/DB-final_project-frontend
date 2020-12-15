@@ -7,7 +7,7 @@
             img-src="/img/admin.svg"
         >
             <template>
-                <div class="mt-n10 px-5">
+                <div class="mt-n10 mb-n5 px-5">
                     <score-line-chart :data="chartData"></score-line-chart>
                 </div>
                 <div>
@@ -17,7 +17,7 @@
                         @button-click="selectCat"
                     ></button-row>
                 </div>
-                <div class="pt-10">
+                <div class="pt-2">
                     <custom-table
                         :headers="headers"
                         :items="currentUnits"
@@ -98,11 +98,11 @@ export default {
             this.middleUnits = this.modifyUnits(response.middle);
             this.easyUnits = this.modifyUnits(response.easy);
 
-            this.allUnits = [
+            this.allUnits = this.sortUnits([
                 ...this.difficultUnits,
                 ...this.middleUnits,
                 ...this.easyUnits,
-            ];
+            ]);
         },
         modifyUnits(units) {
             return units.map((unit) => {
@@ -110,9 +110,7 @@ export default {
             });
         },
         transformChartData(dataset) {
-            const sortedDataset = [...dataset].sort((a, b) => {
-                return a.unitId - b.unitId;
-            });
+            const sortedDataset = this.sortUnits(dataset);
             return {
                 ...this.chartData,
                 rows: this.modifyUnits(sortedDataset),
@@ -120,6 +118,11 @@ export default {
         },
         selectCat(level) {
             this.currentCat = level;
+        },
+        sortUnits(dataset) {
+            return [...dataset].sort((a, b) => {
+                return a.unitId - b.unitId;
+            });
         },
     },
     mounted() {
