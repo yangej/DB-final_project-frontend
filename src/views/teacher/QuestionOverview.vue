@@ -1,16 +1,36 @@
 <template>
-    <div style="padding-top: 100px">
-        <score-line-chart :data="chartData"></score-line-chart>
+    <div class="pt-16">
+        <main-card
+            class="mx-auto"
+            title="答題狀況"
+            en-title="Answering Situation"
+            img-src="/img/admin.svg"
+        >
+            <template>
+                <div class="mt-n10 px-5">
+                    <score-line-chart :data="chartData"></score-line-chart>
+                </div>
+                <div>
+                    <button-row
+                        :btn-infos="btnInfos"
+                        :current-btn="currentCat"
+                        @button-click="selectCat"
+                    ></button-row>
+                </div>
+            </template>
+        </main-card>
     </div>
 </template>
 
 <script>
+import MainCard from '@/components/common/MainCard';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
+import ButtonRow from '../../components/common/ButtonRow';
 import { mockQuestionOverview } from '../../dummies/summaryData';
 
 export default {
     name: 'StudentDetail',
-    components: { ScoreLineChart },
+    components: { MainCard, ScoreLineChart, ButtonRow },
     data() {
         return {
             allUnits: [],
@@ -21,6 +41,26 @@ export default {
                 columns: ['unit', 'score'],
                 rows: [],
             },
+            btnInfos: [
+                {
+                    text: '全部',
+                    level: 'all',
+                },
+                {
+                    text: '難',
+                    level: 'difficult',
+                },
+                {
+                    text: '中',
+                    level: 'middle',
+                },
+                {
+                    text: '易',
+                    level: 'easy',
+                },
+            ],
+            currentCat: 'all',
+            currentUnits: [],
         };
     },
     methods: {
@@ -36,20 +76,24 @@ export default {
             ];
         },
         transformChartData(dataset) {
-            const sortedDartaset = [...dataset].sort((a, b) => {
+            const sortedDataset = [...dataset].sort((a, b) => {
                 return a.unitId - b.unitId;
             });
             return {
                 ...this.chartData,
-                rows: sortedDartaset.map((data) => {
+                rows: sortedDataset.map((data) => {
                     return { unit: `Unit ${data.unitId}`, score: data.avg };
                 }),
             };
+        },
+        selectCat(level) {
+            this.currentCat = level;
         },
     },
     mounted() {
         const response = mockQuestionOverview;
         this.categorizeUnits(response);
+        this.currentUnits = this.allUnits;
         this.chartData = this.transformChartData(this.allUnits);
     },
 };
