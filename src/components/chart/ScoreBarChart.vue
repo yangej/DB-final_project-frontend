@@ -1,24 +1,38 @@
 <template>
     <ve-chart
-        :data="data"
+        :data="dataset"
         :legend-visible="false"
         :extend="chartSettings"
     ></ve-chart>
 </template>
 
 <script>
-import VeChart from 'v-charts/lib/histogram';
+import VeChart from 'v-charts/lib/bar';
 
 export default {
-    name: 'ScoreLineChart',
+    name: 'ScoreBarChart',
     components: { VeChart },
     props: {
-        data: Object,
+        dataset: Object,
     },
     data() {
+        let self = this;
         return {
+            students: '',
             chartSettings: {
                 color: ['#5BC88F'],
+                grid: {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (params) {
+                            return self.students.data[params.dataIndex];
+                        },
+                    },
+                },
+                series(item) {
+                    self.students = item[1];
+                    return item;
+                },
             },
         };
     },
