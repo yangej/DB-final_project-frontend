@@ -50,7 +50,7 @@ export default {
         goTo(path) {
             this.$router.push({ path });
         },
-        getChartData(scores) {
+        transformChartData(scores) {
             return {
                 ...this.chartData,
                 rows: scores.map((unitScore) => {
@@ -66,7 +66,7 @@ export default {
         const resScores = await apiExecutor.getScores(studentId);
         const scores = resScores.data.scores;
 
-        this.chartData = this.getChartData(scores);
+        this.chartData = this.transformChartData(scores);
         this.infos = resStudent.data;
         this.scores = scores;
     },
