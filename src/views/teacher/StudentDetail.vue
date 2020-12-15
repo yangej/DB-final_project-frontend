@@ -11,25 +11,21 @@
             <score-line-chart :data="chartData"></score-line-chart>
         </div>
         <div class="pb-10 px-10">
-            <v-data-table
-                :headers="headers"
-                :items="scores"
-                class="shadow"
-                hide-default-footer
-            ></v-data-table>
+            <custom-table :headers="headers" :items="scores"></custom-table>
         </div>
     </back-card>
 </template>
 
 <script>
 import BackCard from '@/components/common/BackCard';
+import CustomTable from '@/components/common/CustomTable';
 import StudentInfoRow from '@/components/teacher/StudentInfoRow';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
 import { apiExecutor } from '@/api';
 
 export default {
     name: 'StudentDetail',
-    components: { BackCard, ScoreLineChart, StudentInfoRow },
+    components: { BackCard, ScoreLineChart, StudentInfoRow, CustomTable },
     data() {
         return {
             infos: {},
