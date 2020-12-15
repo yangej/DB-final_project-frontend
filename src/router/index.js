@@ -86,7 +86,7 @@ const routes = [
                 component: () => import('@/views/teacher/UnitOverview.vue'),
             },
             {
-                path: '/dev/question-answers',
+                path: '/dev/question-answers/:id',
                 name: 'QuestionAnswers',
                 component: () => import('@/views/teacher/QuestionAnswers.vue'),
             },
