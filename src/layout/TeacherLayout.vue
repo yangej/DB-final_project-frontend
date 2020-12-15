@@ -1,6 +1,6 @@
 <template>
     <div style="padding-top: 100px; padding-bottom: 100px">
-        <custom-navbar></custom-navbar>
+        <custom-navbar :nav-items="navItems" :role="userRole"></custom-navbar>
         <transition name="fade" mode="out-in">
             <router-view />
         </transition>
