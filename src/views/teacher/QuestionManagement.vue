@@ -5,8 +5,7 @@
         @button-click="goTo('/teacher/course-management')"
     >
         <div class="pa-14">
-            <p class="primary--text font-weight-bold ma-0">{{ unit }}</p>
-            <h3 class="headline font-weight-medium mb-7">{{ title }}</h3>
+            <unit-title :unit="unit" :title="title"></unit-title>
             <div>
                 <question-row
                     v-for="(question, index) in questions"
@@ -15,9 +14,18 @@
                     :question="question.question"
                     :options="question.options"
                     :answer="question.answer"
-                    :analysis="question.analysis"
-                    :show-analysis="question.showAnalysis"
-                ></question-row>
+                >
+                    <div
+                        v-if="question.showAnalysis"
+                        class="primary lighten-1 pa-5"
+                    >
+                        <span class="warning--text font-weight-medium">
+                            答案為 {{ question.answer }}，{{
+                                question.analysis
+                            }}
+                        </span>
+                    </div>
+                </question-row>
             </div>
             <div class="d-flex justify-end">
                 <custom-button
@@ -35,12 +43,13 @@
 import BackCard from '@/components/common/BackCard';
 import QuestionRow from '@/components/common/QuestionRow';
 import CustomButton from '@/components/common/CustomButton';
-import { apiExecutor } from '../../api';
+import UnitTitle from '@/components/common/UnitTitle';
+import { apiExecutor } from '@/api';
 import { mapActions } from 'vuex';
 
 export default {
     name: 'QuestionManagement',
-    components: { BackCard, QuestionRow, CustomButton },
+    components: { BackCard, UnitTitle, QuestionRow, CustomButton },
     data() {
         return {
             unit: '',

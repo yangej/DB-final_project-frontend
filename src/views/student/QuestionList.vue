@@ -5,20 +5,27 @@
         @button-click="goTo('/student/course-list')"
     >
         <div class="pa-14">
-            <p class="primary--text font-weight-bold ma-0">{{ unit }}</p>
-            <h3 class="headline font-weight-medium mb-7">{{ title }}</h3>
+            <unit-title :unit="unit" :title="title"></unit-title>
             <div>
                 <question-row
                     v-for="(question, index) in questions"
-                    :show-analysis="question.showAnalysis"
-                    :analysis="question.analysis"
                     :answer="question.answer"
-                    :readonly="false"
                     :key="`question-${index}`"
                     :question="question.question"
                     :options="question.options"
                     @update-value="updateValue($event, index)"
-                ></question-row>
+                >
+                    <div
+                        v-if="question.showAnalysis"
+                        class="primary lighten-1 pa-5"
+                    >
+                        <span class="warning--text font-weight-medium">
+                            答案為 {{ question.answer }}，{{
+                                question.analysis
+                            }}
+                        </span>
+                    </div>
+                </question-row>
             </div>
             <custom-button
                 text="送出回答"
@@ -32,14 +39,15 @@
 
 <script>
 import BackCard from '@/components/common/BackCard';
+import UnitTitle from '@/components/common/UnitTitle';
 import QuestionRow from '@/components/common/QuestionRow';
 import CustomButton from '@/components/common/CustomButton';
-import { apiExecutor } from '../../api';
+import { apiExecutor } from '@/api';
 import { mapActions } from 'vuex';
 
 export default {
     name: 'QuestionList',
-    components: { BackCard, QuestionRow, CustomButton },
+    components: { BackCard, UnitTitle, QuestionRow, CustomButton },
     data() {
         return {
             id: 0,
