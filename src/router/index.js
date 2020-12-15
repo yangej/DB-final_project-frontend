@@ -74,6 +74,11 @@ const routes = [
         component: () => import('@/views/login/Register.vue'),
     },
     {
+        path: '/question-overview',
+        name: 'QuestionOverview',
+        component: () => import('@/views/teacher/QuestionOverview.vue'),
+    },
+    {
         path: '*',
         redirect: `/${role}`,
     },

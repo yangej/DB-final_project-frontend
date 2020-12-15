@@ -1,36 +1,36 @@
 export const mockQuestionOverview = {
     difficult: [
         {
-            courseId: 1,
+            unitId: 1,
             name: '資料庫程式語言',
             avg: 40,
         },
         {
-            courseId: 4,
+            unitId: 4,
             name: '資料庫程式語言',
             avg: 40,
         },
     ],
     middle: [
         {
-            courseId: 2,
+            unitId: 2,
             name: '關連式資料庫',
             avg: 65,
         },
         {
-            courseId: 6,
+            unitId: 6,
             name: '資料庫程式語言',
             avg: 40,
         },
     ],
     easy: [
         {
-            courseId: 3,
+            unitId: 3,
             name: '資料庫介紹',
             avg: 90,
         },
         {
-            courseId: 5,
+            unitId: 5,
             name: '資料庫程式語言',
             avg: 40,
         },
