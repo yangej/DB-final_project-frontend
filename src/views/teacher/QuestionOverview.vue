@@ -17,6 +17,13 @@
                         @button-click="selectCat"
                     ></button-row>
                 </div>
+                <div class="pt-10">
+                    <custom-table
+                        :headers="headers"
+                        :items="currentUnits"
+                        :has-action="true"
+                    ></custom-table>
+                </div>
             </template>
         </main-card>
     </div>
@@ -24,13 +31,14 @@
 
 <script>
 import MainCard from '@/components/common/MainCard';
+import CustomTable from '../../components/common/CustomTable';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
 import ButtonRow from '../../components/common/ButtonRow';
 import { mockQuestionOverview } from '../../dummies/summaryData';
 
 export default {
     name: 'StudentDetail',
-    components: { MainCard, ScoreLineChart, ButtonRow },
+    components: { MainCard, CustomTable, ScoreLineChart, ButtonRow },
     data() {
         return {
             allUnits: [],
@@ -38,7 +46,7 @@ export default {
             middleUnits: [],
             easyUnits: [],
             chartData: {
-                columns: ['unit', 'score'],
+                columns: ['unit', 'avg'],
                 rows: [],
             },
             btnInfos: [
@@ -60,14 +68,35 @@ export default {
                 },
             ],
             currentCat: 'all',
-            currentUnits: [],
+            headers: [
+                { text: '單元', value: 'unit', sortable: false },
+                { text: '單元名稱', value: 'name', sortable: false },
+                { text: '平均分數', value: 'avg', sortable: false },
+            ],
         };
+    },
+    computed: {
+        currentUnits: {
+            get() {
+                switch (this.currentCat) {
+                    case 'difficult':
+                        return this.difficultUnits;
+                    case 'middle':
+                        return this.middleUnits;
+                    case 'easy':
+                        return this.easyUnits;
+                    default:
+                        return this.allUnits;
+                }
+            },
+            set() {},
+        },
     },
     methods: {
         categorizeUnits(response) {
-            this.difficultUnits = response.difficult;
-            this.middleUnits = response.middle;
-            this.easyUnits = response.easy;
+            this.difficultUnits = this.modifyUnits(response.difficult);
+            this.middleUnits = this.modifyUnits(response.middle);
+            this.easyUnits = this.modifyUnits(response.easy);
 
             this.allUnits = [
                 ...this.difficultUnits,
@@ -75,15 +104,18 @@ export default {
                 ...this.easyUnits,
             ];
         },
+        modifyUnits(units) {
+            return units.map((unit) => {
+                return { ...unit, unit: `Unit ${unit.unitId}` };
+            });
+        },
         transformChartData(dataset) {
             const sortedDataset = [...dataset].sort((a, b) => {
                 return a.unitId - b.unitId;
             });
             return {
                 ...this.chartData,
-                rows: sortedDataset.map((data) => {
-                    return { unit: `Unit ${data.unitId}`, score: data.avg };
-                }),
+                rows: this.modifyUnits(sortedDataset),
             };
         },
         selectCat(level) {
