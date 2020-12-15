@@ -31,10 +31,10 @@
 
 <script>
 import MainCard from '@/components/common/MainCard';
-import CustomTable from '../../components/common/CustomTable';
+import CustomTable from '@/components/common/CustomTable';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
-import ButtonRow from '../../components/common/ButtonRow';
-import { mockQuestionOverview } from '../../dummies/summaryData';
+import ButtonRow from '@/components/common/ButtonRow';
+import { mockQuestionOverview } from '@/dummies/summaryData';
 
 export default {
     name: 'StudentDetail',
