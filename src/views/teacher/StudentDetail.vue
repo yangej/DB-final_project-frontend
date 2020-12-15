@@ -73,29 +73,4 @@ export default {
 .border-left {
     border-left: 1px solid #efefef;
 }
-
-::v-deep table {
-    border-top-left-radius: 5px !important;
-    border-top-right-radius: 5px !important;
-    overflow: hidden;
-}
-
-::v-deep .v-data-table-header {
-    background-color: #5bc88f;
-
-    th {
-        padding: 16px 30px !important;
-        border-bottom: 1px solid #efefef !important;
-        span {
-            font-size: 16px;
-            color: white !important;
-        }
-    }
-}
-
-::v-deep td {
-    border-bottom: 1px solid #efefef !important;
-    padding: 16px 30px !important;
-    font-size: 16px !important;
-}
 </style>
