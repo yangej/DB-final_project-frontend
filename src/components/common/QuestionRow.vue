@@ -12,11 +12,7 @@
                 ></v-radio>
             </v-radio-group>
         </div>
-        <div v-if="showAnalysis" class="primary lighten-1 pa-5">
-            <span class="warning--text font-weight-medium"
-                >答案為 {{ answer }}，{{ analysis }}</span
-            >
-        </div>
+        <slot></slot>
     </v-card>
 </template>
 
@@ -30,13 +26,12 @@ export default {
         };
     },
     props: {
-        readonly: Boolean,
+        readonly: { type: Boolean, default: false },
         tagText: String,
         question: String,
         answer: String,
         options: Array,
         analysis: String,
-        showAnalysis: Boolean,
     },
     methods: {
         changeValue() {
@@ -44,7 +39,7 @@ export default {
         },
     },
     mounted() {
-        this.selection = this.showAnalysis ? this.answer : '';
+        this.selection = this.readonly ? this.answer : '';
     },
 };
 </script>

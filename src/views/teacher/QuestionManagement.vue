@@ -14,9 +14,18 @@
                     :question="question.question"
                     :options="question.options"
                     :answer="question.answer"
-                    :analysis="question.analysis"
-                    :show-analysis="question.showAnalysis"
-                ></question-row>
+                >
+                    <div
+                        v-if="question.showAnalysis"
+                        class="primary lighten-1 pa-5"
+                    >
+                        <span class="warning--text font-weight-medium">
+                            答案為 {{ question.answer }}，{{
+                                question.analysis
+                            }}
+                        </span>
+                    </div>
+                </question-row>
             </div>
             <div class="d-flex justify-end">
                 <custom-button
