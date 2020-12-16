@@ -21,7 +21,7 @@ export default {
     name: 'QuestionRow',
     data() {
         return {
-            optionValue: ['A', 'B', 'C'],
+            optionValue: ['A', 'B', 'C', 'D'],
             selection: '',
         };
     },
@@ -39,7 +39,7 @@ export default {
         },
     },
     mounted() {
-        this.selection = this.readonly ? this.answer : '';
+        this.selection = this.readonly || this.answer ? this.answer : '';
     },
 };
 </script>
