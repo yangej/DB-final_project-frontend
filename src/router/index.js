@@ -60,9 +60,11 @@ const teacherRoutes = [
 ];
 
 const roleRoutes = role === 'teacher' ? teacherRoutes : studentRoutes;
+const redirectRoute = role ? `/${role}` : '/login';
 const routes = [
     {
         path: '/',
+        redirect: redirectRoute,
     },
     {
         path: '/login',

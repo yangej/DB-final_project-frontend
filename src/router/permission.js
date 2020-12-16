@@ -15,11 +15,7 @@ const routerHook = async (to, from, next) => {
             next();
         }
     } else {
-        if (to.path === '/') {
-            next('/login');
-        } else {
-            next();
-        }
+        next();
     }
 };
 
