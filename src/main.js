@@ -9,10 +9,6 @@ import './router/permission';
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-// if (process.env.NODE_ENV === 'development') {
-//     makeServer();
-// }
-
 new Vue({
     router,
     store,
