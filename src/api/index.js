@@ -6,30 +6,27 @@ const apiFactory = function (axios) {
         getAllUnits() {
             return axios.get('/units');
         },
-        // getQuestion(id) {
-        //     return axios.get(`/questions/${id}`);
-        // },
-        // setQuestionSent(id, isSent) {
-        //     return axios.post(`/send-questions/${id}`, isSent);
-        // },
-        // getAllStudents() {
-        //     return axios.get('/students');
-        // },
-        // getStudent(id) {
-        //     return axios.get(`/students/${id}`);
-        // },
-        // getScores(id) {
-        //     return axios.get(`/scores/${id}`);
-        // },
+        getQuestion(id) {
+            return axios.get(`/questions/${id}`);
+        },
+        setQuestionSent(unitId) {
+            return axios.post(`/send-questions`, unitId);
+        },
+        getAllStudents() {
+            return axios.get('/student-list');
+        },
+        getStudentDetail(id) {
+            return axios.get(`/student/detail/${id}`);
+        },
         login(loginInfos) {
             return axios.post('/login', loginInfos);
         },
         register(registerInfos) {
             return axios.post('/register', registerInfos);
         },
-        // submitAnswers(answerInfos) {
-        //     return axios.post('/answers', answerInfos);
-        // },
+        submitAnswers(answerInfos) {
+            return axios.post('/answer', answerInfos);
+        },
     };
 };
 

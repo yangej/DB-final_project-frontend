@@ -20,18 +20,16 @@
                         class="primary lighten-1 pa-5"
                     >
                         <span class="warning--text font-weight-medium">
-                            答案為 {{ question.answer }}，{{
-                                question.analysis
-                            }}
+                            {{ question.analysis }}
                         </span>
                     </div>
                 </question-row>
             </div>
             <div class="d-flex justify-end">
                 <custom-button
+                    v-if="!isSent"
                     text="送出問題"
                     width="130"
-                    :disabled="isSent"
                     @click="send"
                 ></custom-button>
             </div>
@@ -63,9 +61,28 @@ export default {
         goTo(path) {
             this.$router.push(path);
         },
+        resetQuestion(question) {
+            const options = [
+                `A ${question.optionA}`,
+                `B ${question.optionB}`,
+                `C ${question.optionC}`,
+                `D ${question.optionD}`,
+            ];
+            return {
+                id: question.id,
+                analysis: question.analyze,
+                question: question.question,
+                answer: question.questionAnswer,
+                showAnalysis: true,
+                options,
+            };
+        },
+        transformBoolean(boolean) {
+            return boolean === 1 ? true : false;
+        },
         send() {
             this.isSent = true;
-            apiExecutor.setQuestionSent(this.id, true);
+            apiExecutor.setQuestionSent(this.id);
             this.updatePopup({
                 popupText: '送出成功',
                 imgSrc: '/img/selection.svg',
@@ -79,12 +96,12 @@ export default {
         this.id = this.$route.params.id;
 
         const response = await apiExecutor.getQuestion(this.id);
-        this.unit = response.data.unit;
-        this.title = response.data.unitName;
-        this.questions = response.data.questions.map((question) => {
-            return { ...question, showAnalysis: true };
-        });
-        this.isSent = response.data.isSent;
+        this.unit = `Unit ${this.$route.params.id}`;
+        this.title = response.result.name;
+        this.questions = response.result.questions.map((question) =>
+            this.resetQuestion(question)
+        );
+        this.isSent = this.transformBoolean(response.result.isSend);
     },
 };
 </script>

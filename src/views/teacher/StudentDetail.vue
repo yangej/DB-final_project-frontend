@@ -7,7 +7,7 @@
         <div class="px-10 pt-10">
             <student-info-row :infos="infos"></student-info-row>
         </div>
-        <div class="pb-5 px-10">
+        <div class="px-10">
             <score-line-chart :data="chartData"></score-line-chart>
         </div>
         <div class="pb-10 px-10">
@@ -50,27 +50,38 @@ export default {
             return {
                 ...this.chartData,
                 rows: scores.map((unitScore) => {
-                    return { unit: unitScore.unit, score: unitScore.score };
+                    return {
+                        unit: `Unit ${unitScore.unit}`,
+                        score: unitScore.score,
+                    };
                 }),
+            };
+        },
+        setScores(scores) {
+            return scores.map((score) => {
+                return { ...score, unit: `Unit ${score.unit}` };
+            });
+        },
+        setStudentInfo(infos) {
+            return {
+                id: infos.studentID,
+                name: infos.studentName,
+                department: infos.department,
+                average: Math.floor(infos.average),
             };
         },
     },
     async created() {
         const studentId = this.$route.params.id;
 
-        const resStudent = await apiExecutor.getStudent(studentId);
-        const resScores = await apiExecutor.getScores(studentId);
-        const scores = resScores.data.scores;
+        const response = await apiExecutor.getStudentDetail(studentId);
+        const scores = response.result.scores;
 
         this.chartData = this.transformChartData(scores);
-        this.infos = resStudent.data;
-        this.scores = scores;
+        this.infos = this.setStudentInfo(response.result);
+        this.scores = this.setScores(scores);
     },
 };
 </script>
 
-<style lang="scss" scoped>
-.border-left {
-    border-left: 1px solid #efefef;
-}
-</style>
+<style lang="scss" scoped></style>

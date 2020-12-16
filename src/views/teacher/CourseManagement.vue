@@ -12,10 +12,10 @@
                         v-for="(course, index) in courses"
                         :key="`course-${index}`"
                         :tag-text="course.unit"
-                        :title="course.unitName"
+                        :title="course.name"
                         action-text="管理問題"
                         @click-button="
-                            goTo('QuestionManagement', course.id, course.title)
+                            goTo(`/teacher/question-management/${course.id}`)
                         "
                     ></item-row>
                 </div>
@@ -38,13 +38,18 @@ export default {
         };
     },
     methods: {
-        goTo(name, id, title) {
-            this.$router.push({ name, params: { id, title } });
+        goTo(path) {
+            this.$router.push({ path });
+        },
+        formatCourse(response) {
+            return response.map((unit) => {
+                return { ...unit, unit: 'Unit ' + unit.id };
+            });
         },
     },
     async created() {
-        const response = await apiExecutor.getAllCourses();
-        this.courses = response.data;
+        const response = await apiExecutor.getAllUnits();
+        this.courses = this.formatCourse(response.result);
     },
 };
 </script>

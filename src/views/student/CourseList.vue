@@ -11,9 +11,9 @@
                     v-for="(course, index) in courses"
                     :key="`course-${index}`"
                     :tag-text="course.unit"
-                    :title="course.unitName"
+                    :title="course.name"
                     action-text="查看問題"
-                    @click-button="goTo('QuestionList', course.id)"
+                    @click-button="goTo(course.id)"
                 ></item-row>
             </template>
         </main-card>
@@ -34,12 +34,12 @@ export default {
         };
     },
     methods: {
-        goTo(name, id, title) {
-            this.$router.push({ name, params: { id, title } });
+        goTo(id) {
+            this.$router.push({ path: `/student/questions/${id}` });
         },
         formatCourse(response) {
             return response.map((unit) => {
-                return { unit: 'Unit ' + unit.id, unitName: unit.name };
+                return { ...unit, unit: 'Unit ' + unit.id };
             });
         },
     },
