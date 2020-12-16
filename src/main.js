@@ -2,11 +2,9 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import router from './router';
-// import router from './router/fakeRouter';
 import store from './store';
 import vuetify from './plugins/vuetify';
-// import './router/permission';
-// import { makeServer } from './mockApi/apiServer';
+import './router/permission';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
