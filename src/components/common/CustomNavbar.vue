@@ -10,7 +10,7 @@
         <router-link
             v-for="(item, index) in navItems"
             :key="`nav-${index}`"
-            class="white--text"
+            class="white--text ml-15"
             :to="item.path"
         >
             {{ item.name }}

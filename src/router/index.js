@@ -60,9 +60,11 @@ const teacherRoutes = [
 ];
 
 const roleRoutes = role === 'teacher' ? teacherRoutes : studentRoutes;
+const redirectRoute = role ? `/${role}` : '/login';
 const routes = [
     {
         path: '/',
+        redirect: redirectRoute,
     },
     {
         path: '/login',
@@ -94,10 +96,15 @@ const routes = [
     },
     {
         path: '*',
-        redirect: `/${role}`,
+        redirect: '/',
     },
     ...roleRoutes,
 ];
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch((err) => err);
+};
 
 const router = new VueRouter({ mode: 'history', routes });
 

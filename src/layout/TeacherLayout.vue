@@ -17,7 +17,7 @@ export default {
         return {
             navItems: [
                 { name: '課程管理', path: '/teacher/course-management' },
-                { name: '學生列表', path: '/teacher/student-management' },
+                { name: '學生列表', path: '/teacher/student-list' },
             ],
             userRole: 'teacher',
         };

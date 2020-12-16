@@ -11,7 +11,7 @@
                     <v-data-table
                         :headers="headers"
                         :items="students"
-                        :sort-by="'avgScore'"
+                        :sort-by="'average'"
                         :sort-desc="false"
                         multi-sort
                         class="shadow"
@@ -24,7 +24,7 @@
                             <span class="pl-4">{{ header.text }}</span>
                         </template>
                         <template v-slot:item.action="{ item }">
-                            <v-btn text @click="onClick(item.id)">
+                            <v-btn text @click="onClick(item.id, item.uid)">
                                 <span class="font-weight-medium body-1"
                                     >查看狀況</span
                                 >
@@ -68,13 +68,27 @@ export default {
         };
     },
     methods: {
-        onClick(id) {
-            this.$router.push({ path: `/teacher/student-detail/${id}` });
+        onClick(id, uid) {
+            this.$router.push({
+                path: `/teacher/student-detail/${uid}`,
+                params: { id },
+            });
+        },
+        transformKeys(students) {
+            return students.map((student) => {
+                return {
+                    uid: student.user_id,
+                    id: student.studentID,
+                    name: student.name,
+                    department: student.department,
+                    average: Math.floor(student.averageScore),
+                };
+            });
         },
     },
     async created() {
         const response = await apiExecutor.getAllStudents();
-        this.students = response.data;
+        this.students = this.transformKeys(response.result);
     },
 };
 </script>
