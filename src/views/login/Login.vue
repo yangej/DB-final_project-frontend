@@ -18,12 +18,23 @@ export default {
         async login(values) {
             const response = await apiExecutor.login(values);
             const result = response.result;
-            this.setLoginInfos({ token: result.token, role: result.identity });
 
-            this.$router.push({ path: `/${result.identity}` });
+            if (result.status === 'success') {
+                await this.setLoginInfos({
+                    token: result.token,
+                    role: result.identity,
+                });
+                await this.$router.push({ path: `/${result.identity}` });
+            } else {
+                this.showPopup({
+                    popupText: result.err,
+                    imgSrc: '/img/disturb.svg',
+                });
+            }
         },
         ...mapActions({
             setLoginInfos: 'user/login',
+            showPopup: 'popup/updatePopup',
         }),
     },
 };

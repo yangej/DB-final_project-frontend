@@ -6,7 +6,7 @@ import store from '@/store';
 
 const role = store.state.user.role;
 
-const studentRoutes = [
+export const studentRoutes = [
     {
         path: '/student',
         name: 'StudentLayout',
@@ -27,7 +27,7 @@ const studentRoutes = [
     },
 ];
 
-const teacherRoutes = [
+export const teacherRoutes = [
     {
         path: '/teacher',
         name: 'TeacherLayout',
@@ -59,7 +59,6 @@ const teacherRoutes = [
     },
 ];
 
-const roleRoutes = role === 'teacher' ? teacherRoutes : studentRoutes;
 const redirectRoute = role ? `/${role}` : '/login';
 const routes = [
     {
@@ -98,7 +97,8 @@ const routes = [
         path: '*',
         redirect: '/',
     },
-    ...roleRoutes,
+    ...studentRoutes,
+    ...teacherRoutes,
 ];
 
 const originalPush = VueRouter.prototype.push;
