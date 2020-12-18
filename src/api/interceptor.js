@@ -1,5 +1,4 @@
 import store from '../store';
-import router from '../router';
 
 export function setInterceptor(axiosInstance) {
     axiosInstance.interceptors.request.use(
@@ -15,14 +14,21 @@ export function setInterceptor(axiosInstance) {
         }
     );
     axiosInstance.interceptors.response.use(
-        (response) => {
-            response.data.result.token &&
-                localStorage.setItem('token', response.data.result.token);
-            return response.data;
+        async (response) => {
+            const result = response.data.result;
+
+            if (result.status === 'fail') {
+                await store.dispatch('popup/updatePopup', {
+                    popupText: result.err,
+                    imgSrc: '/img/disturb.svg',
+                });
+            } else {
+                result.token && localStorage.setItem('token', result.token);
+                return result;
+            }
+            return result;
         },
         async (error) => {
-            await store.dispatch('user/logout');
-            await router.push('/login');
             return Promise.reject(error);
         }
     );
