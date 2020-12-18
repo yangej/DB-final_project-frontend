@@ -55,6 +55,11 @@ export const teacherRoutes = [
                 name: 'StudentDetail',
                 component: () => import('@/views/teacher/StudentDetail.vue'),
             },
+            {
+                path: '/teacher/question-answers/:id',
+                name: 'QuestionAnswers',
+                component: () => import('@/views/teacher/QuestionAnswers.vue'),
+            },
         ],
     },
 ];
@@ -85,11 +90,6 @@ const routes = [
                 path: '/dev/unit-overview',
                 name: 'UnitOverview',
                 component: () => import('@/views/teacher/UnitOverview.vue'),
-            },
-            {
-                path: '/dev/question-answers/:id',
-                name: 'QuestionAnswers',
-                component: () => import('@/views/teacher/QuestionAnswers.vue'),
             },
         ],
     },
