@@ -88,7 +88,7 @@ export default {
     },
     async created() {
         const response = await apiExecutor.getAllStudents();
-        this.students = this.transformKeys(response.result);
+        this.students = this.transformKeys(response);
     },
 };
 </script>

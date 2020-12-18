@@ -116,12 +116,12 @@ export default {
         this.id = this.$route.params.id;
 
         const response = await apiExecutor.getQuestion(this.id);
-        this.questions = response.result.questions.map((question) =>
+        this.questions = response.questions.map((question) =>
             this.resetQuestion(question)
         );
         this.isSent = this.questions[0].studentAnswer ? true : false;
         this.unit = `Unit ${this.$route.params.id}`;
-        this.title = response.result.name;
+        this.title = response.name;
     },
 };
 </script>

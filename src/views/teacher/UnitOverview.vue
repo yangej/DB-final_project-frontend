@@ -137,7 +137,7 @@ export default {
     },
     async mounted() {
         const response = await apiExecutor.getUnitOverview();
-        this.categorizeUnits(response.result);
+        this.categorizeUnits(response);
         this.currentUnits = this.allUnits;
         this.chartData = this.transformChartData(this.allUnits);
     },

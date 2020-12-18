@@ -75,10 +75,10 @@ export default {
         const studentId = this.$route.params.id;
 
         const response = await apiExecutor.getStudentDetail(studentId);
-        const scores = response.result.scores;
+        const scores = response.scores;
 
         this.chartData = this.transformChartData(scores);
-        this.infos = this.setStudentInfo(response.result);
+        this.infos = this.setStudentInfo(response);
         this.scores = this.setScores(scores);
     },
 };

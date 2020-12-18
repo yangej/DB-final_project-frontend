@@ -97,11 +97,11 @@ export default {
 
         const response = await apiExecutor.getQuestion(this.id);
         this.unit = `Unit ${this.$route.params.id}`;
-        this.title = response.result.name;
-        this.questions = response.result.questions.map((question) =>
+        this.title = response.name;
+        this.questions = response.questions.map((question) =>
             this.resetQuestion(question)
         );
-        this.isSent = this.transformBoolean(response.result.isSend);
+        this.isSent = this.transformBoolean(response.isSend);
     },
 };
 </script>
