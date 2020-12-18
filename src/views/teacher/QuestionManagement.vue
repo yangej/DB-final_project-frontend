@@ -58,49 +58,49 @@ export default {
         };
     },
     methods: {
+        ...mapActions({
+            updatePopup: 'popup/updatePopup',
+        }),
         goTo(path) {
             this.$router.push(path);
         },
-        resetQuestion(question) {
-            const options = [
-                `A ${question.optionA}`,
-                `B ${question.optionB}`,
-                `C ${question.optionC}`,
-                `D ${question.optionD}`,
-            ];
-            return {
-                id: question.id,
-                analysis: question.analyze,
-                question: question.question,
-                answer: question.questionAnswer,
-                showAnalysis: true,
-                options,
-            };
-        },
-        transformBoolean(boolean) {
-            return boolean === 1 ? true : false;
-        },
-        send() {
+        async send() {
             this.isSent = true;
-            apiExecutor.setQuestionSent(this.id);
+            await apiExecutor.setQuestionSent(this.id);
             this.updatePopup({
                 popupText: '送出成功',
                 imgSrc: '/img/selection.svg',
             });
         },
-        ...mapActions({
-            updatePopup: 'popup/updatePopup',
-        }),
+        resetQuestions(questions) {
+            return questions.map((question) => {
+                const options = [
+                    `A ${question.optionA}`,
+                    `B ${question.optionB}`,
+                    `C ${question.optionC}`,
+                    `D ${question.optionD}`,
+                ];
+                return {
+                    id: question.id,
+                    analysis: question.analyze,
+                    question: question.question,
+                    answer: question.questionAnswer,
+                    showAnalysis: true,
+                    options,
+                };
+            });
+        },
+        transformBoolean(boolean) {
+            return boolean === 1 ? true : false;
+        },
     },
-    async created() {
+    async mounted() {
         this.id = this.$route.params.id;
 
         const response = await apiExecutor.getQuestion(this.id);
         this.unit = `Unit ${this.$route.params.id}`;
         this.title = response.name;
-        this.questions = response.questions.map((question) =>
-            this.resetQuestion(question)
-        );
+        this.questions = this.resetQuestions(response.questions);
         this.isSent = this.transformBoolean(response.isSend);
     },
 };
