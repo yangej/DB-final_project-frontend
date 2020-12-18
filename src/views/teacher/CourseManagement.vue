@@ -49,7 +49,7 @@ export default {
     },
     async created() {
         const response = await apiExecutor.getAllUnits();
-        this.courses = this.formatCourse(response.result);
+        this.courses = this.formatCourse(response);
     },
 };
 </script>

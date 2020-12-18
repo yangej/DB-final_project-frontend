@@ -147,16 +147,15 @@ export default {
 
         const resultRes = await apiExecutor.getQuestionResults(this.unitId);
         const studentRes = await apiExecutor.getAllStudentScores(this.unitId);
-        console.log(resultRes);
 
-        this.questions = this.formatQuestions(resultRes.result.questions);
+        this.questions = this.formatQuestions(resultRes.questions);
 
         this.questionChartDatas = this.getQuestionRows(this.questions);
         this.overallChartData = {
             ...this.overallChartData,
             rows: studentRes.result,
         };
-        this.title = resultRes.result.unitTitle;
+        this.title = resultRes.unitTitle;
     },
 };
 </script>
