@@ -97,7 +97,7 @@ export default {
     async mounted() {
         this.id = this.$route.params.id;
 
-        const response = await apiExecutor.getQuestion(this.id);
+        const response = await apiExecutor.getQuestions(this.id);
         this.unit = `Unit ${this.$route.params.id}`;
         this.title = response.name;
         this.questions = this.resetQuestions(response.questions);
