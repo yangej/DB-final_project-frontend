@@ -1,7 +1,6 @@
 import VueRouter from 'vue-router';
 import StudentLayout from '@/layout/StudentLayout';
 import TeacherLayout from '@/layout/TeacherLayout';
-import DevLayout from '@/layout/DevLayout';
 import store from '@/store';
 
 const role = store.state.user.role;
@@ -60,6 +59,11 @@ export const teacherRoutes = [
                 name: 'QuestionAnswers',
                 component: () => import('@/views/teacher/QuestionAnswers.vue'),
             },
+            {
+                path: '/teacher/unit-overview',
+                name: 'UnitOverview',
+                component: () => import('@/views/teacher/UnitOverview.vue'),
+            },
         ],
     },
 ];
@@ -79,19 +83,6 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: () => import('@/views/login/Register.vue'),
-    },
-    {
-        path: '/dev',
-        name: 'DevLayout',
-        component: DevLayout,
-        redirect: '/dev/question-overview',
-        children: [
-            {
-                path: '/dev/unit-overview',
-                name: 'UnitOverview',
-                component: () => import('@/views/teacher/UnitOverview.vue'),
-            },
-        ],
     },
     {
         path: '*',
