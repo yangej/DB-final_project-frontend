@@ -24,8 +24,8 @@ export function setInterceptor(axiosInstance) {
                 });
             } else {
                 result.token && localStorage.setItem('token', result.token);
-                return result;
             }
+
             return result;
         },
         async (error) => {
