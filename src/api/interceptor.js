@@ -24,8 +24,10 @@ export function setInterceptor(axiosInstance) {
                     imgSrc: '/img/disturb.svg',
                 });
 
-                // if token is expired, show popup and route to login page
-                result.err === '請重新登入' && (await router.push('/login'));
+                if (result.err === '請重新登入') {
+                    await store.dispatch('user/logout');
+                    await router.push('/login');
+                }
             } else {
                 result.token && localStorage.setItem('token', result.token);
             }
