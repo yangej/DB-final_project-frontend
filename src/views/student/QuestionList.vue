@@ -19,7 +19,14 @@
                         v-if="question.showAnalysis"
                         class="primary lighten-1 pa-5"
                     >
-                        <span class="warning--text font-weight-medium">
+                        <span
+                            :class="[
+                                question.studentAnswer !== question.answer
+                                    ? 'warning--text'
+                                    : 'primary--text',
+                            ]"
+                            class="font-weight-medium"
+                        >
                             {{ question.analysis }}
                         </span>
                     </div>
@@ -52,23 +59,30 @@ export default {
             unit: '',
             title: '',
             questions: [],
-            isFinished: false,
             isSent: false,
             score: 0,
+            questionIds: [],
         };
     },
+    computed: {
+        answerRequest() {
+            return {
+                uid: this.id,
+                score: this.score,
+                qid: this.questionIds,
+                ans: this.questions.map((question) => question.studentAnswer),
+            };
+        },
+    },
     methods: {
+        ...mapActions({
+            updatePopup: 'popup/updatePopup',
+        }),
         goTo(path) {
             this.$router.push(path);
         },
         updateValue(value, index) {
             this.questions[index].studentAnswer = value;
-            this.checkAnswers();
-        },
-        checkAnswers() {
-            this.isFinished = this.questions.every((question) => {
-                return question.studentAnswer !== '';
-            });
         },
         countScore(questions) {
             const total = 100;
@@ -76,29 +90,18 @@ export default {
             let tempScore = 0;
 
             questions.forEach((question, index) => {
-                question.studentAnswer === question.answer
+                question.answer === question.studentAnswer
                     ? (tempScore += scorePerQues)
                     : (this.questions[index].showAnalysis = true);
             });
 
             this.score = Math.floor(tempScore);
         },
-        resetQuestion(question) {
-            const options = [
-                `A ${question.optionA}`,
-                `B ${question.optionB}`,
-                `C ${question.optionC}`,
-                `D ${question.optionD}`,
-            ];
-            return {
-                id: question.id,
-                analysis: question.analyze,
-                question: question.question,
-                answer: question.questionAnswer,
-                studentAnswer: question.studentAnswer,
-                showAnalysis: question.studentAnswer ? true : false,
-                options,
-            };
+        hideButton() {
+            this.isSent = true;
+        },
+        showAllAnalysis() {
+            this.questions.map((question) => (question.showAnalysis = true));
         },
         async send() {
             this.updatePopup({
@@ -106,20 +109,43 @@ export default {
                 imgSrc: '/img/correction.svg',
             });
             this.countScore(this.questions);
-            this.isSent = true;
+            await apiExecutor.submitAnswers(this.answerRequest);
+            this.hideButton();
+            this.showAllAnalysis();
         },
-        ...mapActions({
-            updatePopup: 'popup/updatePopup',
-        }),
+        resetQuestions(questions) {
+            return questions.map((question) => {
+                const options = [
+                    `A ${question.optionA}`,
+                    `B ${question.optionB}`,
+                    `C ${question.optionC}`,
+                    `D ${question.optionD}`,
+                ];
+                return {
+                    id: question.id,
+                    analysis: question.analyze,
+                    question: question.question,
+                    answer: question.questionAnswer,
+                    studentAnswer: question.studentAnswer,
+                    showAnalysis: question.studentAnswer ? true : false,
+                    options,
+                };
+            });
+        },
+        getQuestionIds(questions) {
+            return questions.map((question) => question.id);
+        },
+        getIsSent(questions) {
+            return questions[0].studentAnswer ? true : false;
+        },
     },
     async mounted() {
         this.id = this.$route.params.id;
 
-        const response = await apiExecutor.getQuestion(this.id);
-        this.questions = response.questions.map((question) =>
-            this.resetQuestion(question)
-        );
-        this.isSent = this.questions[0].studentAnswer ? true : false;
+        const response = await apiExecutor.getQuestions(this.id);
+        this.questions = this.resetQuestions(response.questions);
+        this.questionIds = this.getQuestionIds(this.questions);
+        this.isSent = this.getIsSent(this.questions);
         this.unit = `Unit ${this.$route.params.id}`;
         this.title = response.name;
     },

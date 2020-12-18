@@ -153,7 +153,7 @@ export default {
         this.questionChartDatas = this.getQuestionRows(this.questions);
         this.overallChartData = {
             ...this.overallChartData,
-            rows: studentRes.result,
+            rows: studentRes,
         };
         this.title = resultRes.unitTitle;
     },

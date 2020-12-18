@@ -6,11 +6,11 @@ const apiFactory = function (axios) {
         getAllUnits() {
             return axios.get('/units');
         },
-        getQuestion(id) {
+        getQuestions(id) {
             return axios.get(`/questions/${id}`);
         },
         setQuestionSent(unitId) {
-            return axios.post(`/send-questions`, unitId);
+            return axios.post('/send-questions', { uid: unitId });
         },
         getAllStudents() {
             return axios.get('/student-list');
