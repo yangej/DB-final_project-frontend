@@ -33,6 +33,9 @@ const apiFactory = function (axios) {
         getQuestionResults(unitId) {
             return axios.get(`/question-result/${unitId}`);
         },
+        getUnitOverview() {
+            return axios.get('/question-overview');
+        },
     };
 };
 

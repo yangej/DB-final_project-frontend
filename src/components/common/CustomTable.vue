@@ -33,9 +33,8 @@ export default {
         },
     },
     methods: {
-        onClick(id) {
-            console.log(id);
-            this.$emit('buttonClick', id);
+        onClick(item) {
+            this.$emit('button-click', item);
         },
     },
 };
