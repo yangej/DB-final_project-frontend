@@ -22,6 +22,9 @@
                         :headers="headers"
                         :items="currentUnits"
                         :has-action="true"
+                        @button-click="
+                            goTo(`/teacher/question-answers/${$event.id}`)
+                        "
                     ></custom-table>
                 </div>
             </template>
@@ -34,7 +37,7 @@ import MainCard from '@/components/common/MainCard';
 import CustomTable from '@/components/common/CustomTable';
 import ScoreLineChart from '@/components/chart/ScoreLineChart';
 import ButtonRow from '@/components/common/ButtonRow';
-import { mockQuestionOverview } from '@/dummies/summaryData';
+import { apiExecutor } from '@/api';
 
 export default {
     name: 'StudentDetail',
@@ -93,6 +96,9 @@ export default {
         },
     },
     methods: {
+        goTo(path) {
+            this.$router.push(path);
+        },
         categorizeUnits(response) {
             this.difficultUnits = this.modifyUnits(response.difficult);
             this.middleUnits = this.modifyUnits(response.middle);
@@ -106,7 +112,11 @@ export default {
         },
         modifyUnits(units) {
             return units.map((unit) => {
-                return { ...unit, unit: `Unit ${unit.unitId}` };
+                return {
+                    ...unit,
+                    unit: `Unit ${unit.id}`,
+                    avg: Math.floor(unit.unitAvg),
+                };
             });
         },
         transformChartData(dataset) {
@@ -121,13 +131,13 @@ export default {
         },
         sortUnits(dataset) {
             return [...dataset].sort((a, b) => {
-                return a.unitId - b.unitId;
+                return a.id - b.id;
             });
         },
     },
-    mounted() {
-        const response = mockQuestionOverview;
-        this.categorizeUnits(response);
+    async mounted() {
+        const response = await apiExecutor.getUnitOverview();
+        this.categorizeUnits(response.result);
         this.currentUnits = this.allUnits;
         this.chartData = this.transformChartData(this.allUnits);
     },
