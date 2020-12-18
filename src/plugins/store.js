@@ -6,7 +6,7 @@ import { user } from '../store/modules/user';
 export const createStore = () => {
     const localStorage = new VuexPersistence({
         storage: window.localStorage,
-        modules: ['user'],
+        paths: ['user'],
     });
 
     return new Vuex.Store({
