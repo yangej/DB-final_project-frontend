@@ -37,11 +37,12 @@ import UnitTitle from '@/components/common/UnitTitle';
 import ScoreHistogram from '@/components/chart/ScoreHistogram';
 import ScoreBarChart from '@/components/chart/ScoreBarChart';
 import QuestionRow from '@/components/common/QuestionRow';
+import { apiExecutor } from '@/api';
 
-import {
-    mockQuestionResults,
-    mockStudentScores,
-} from '../../dummies/summaryData';
+// import {
+//     mockQuestionResults,
+//     mockStudentScores,
+// } from '../../dummies/summaryData';
 
 export default {
     name: 'QuestionAnswers',
@@ -96,7 +97,7 @@ export default {
                 D: { count: 0, students: [] },
             };
             question.studentAnswers.forEach((studentAnswer) => {
-                const option = studentAnswer.option;
+                const option = studentAnswer.studentOption;
                 answerCount[option].count += 1;
                 answerCount[option].students.push(studentAnswer.name);
             });
@@ -141,16 +142,21 @@ export default {
             });
         },
     },
-    mounted() {
-        const resultRes = mockQuestionResults;
-        const studentRes = mockStudentScores;
+    async mounted() {
+        this.unitId = this.$route.params.id;
 
-        this.questions = this.formatQuestions(resultRes.questions);
+        const resultRes = await apiExecutor.getQuestionResults(this.unitId);
+        const studentRes = await apiExecutor.getAllStudentScores(this.unitId);
+        console.log(resultRes);
+
+        this.questions = this.formatQuestions(resultRes.result.questions);
 
         this.questionChartDatas = this.getQuestionRows(this.questions);
-        this.overallChartData = { ...this.overallChartData, rows: studentRes };
-        this.title = resultRes.unitTitle;
-        this.unitId = this.$route.params.id;
+        this.overallChartData = {
+            ...this.overallChartData,
+            rows: studentRes.result,
+        };
+        this.title = resultRes.result.unitTitle;
     },
 };
 </script>
