@@ -29,6 +29,9 @@ export default {
                         },
                     },
                 },
+                xAxis: {
+                    interval: 1,
+                },
                 series(item) {
                     self.students = item[1];
                     return item;
