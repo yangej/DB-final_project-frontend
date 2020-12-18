@@ -19,7 +19,14 @@
                         v-if="question.showAnalysis"
                         class="primary lighten-1 pa-5"
                     >
-                        <span class="warning--text font-weight-medium">
+                        <span
+                            :class="[
+                                question.studentAnswer !== question.answer
+                                    ? 'warning--text'
+                                    : 'primary--text',
+                            ]"
+                            class="font-weight-medium"
+                        >
                             {{ question.analysis }}
                         </span>
                     </div>
@@ -55,6 +62,7 @@ export default {
             isFinished: false,
             isSent: false,
             score: 0,
+            answers: [],
         };
     },
     methods: {
@@ -62,13 +70,11 @@ export default {
             this.$router.push(path);
         },
         updateValue(value, index) {
-            this.questions[index].studentAnswer = value;
+            this.answers[index] = value;
             this.checkAnswers();
         },
         checkAnswers() {
-            this.isFinished = this.questions.every((question) => {
-                return question.studentAnswer !== '';
-            });
+            this.isFinished = this.answers.every((answer) => answer != '');
         },
         countScore(questions) {
             const total = 100;
@@ -76,7 +82,7 @@ export default {
             let tempScore = 0;
 
             questions.forEach((question, index) => {
-                question.studentAnswer === question.answer
+                question.studentAnswer === this.answer[index]
                     ? (tempScore += scorePerQues)
                     : (this.questions[index].showAnalysis = true);
             });
@@ -106,6 +112,7 @@ export default {
                 imgSrc: '/img/correction.svg',
             });
             this.countScore(this.questions);
+            await apiExecutor.submitAnswers();
             this.isSent = true;
         },
         ...mapActions({
@@ -122,6 +129,8 @@ export default {
         this.isSent = this.questions[0].studentAnswer ? true : false;
         this.unit = `Unit ${this.$route.params.id}`;
         this.title = response.name;
+
+        this.answers = Array(this.questions.length).fill('');
     },
 };
 </script>
