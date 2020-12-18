@@ -27,6 +27,12 @@ const apiFactory = function (axios) {
         submitAnswers(answerInfos) {
             return axios.post('/answer', answerInfos);
         },
+        getAllStudentScores(unitId) {
+            return axios.get(`/all-students-scores/${unitId}`);
+        },
+        getQuestionResults(unitId) {
+            return axios.get(`/question-result/${unitId}`);
+        },
     };
 };
 
