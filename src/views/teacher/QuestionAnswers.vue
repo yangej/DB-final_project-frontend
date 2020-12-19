@@ -118,14 +118,9 @@ export default {
                     columns: ['option', 'count', 'students'],
                     rows: [
                         {
-                            option: 'A',
-                            count: A.count,
-                            students: A.students.join('、'),
-                        },
-                        {
-                            option: 'B',
-                            count: B.count,
-                            students: B.students.join('、'),
+                            option: 'D',
+                            count: D.count,
+                            students: D.students.join('、'),
                         },
                         {
                             option: 'C',
@@ -133,9 +128,14 @@ export default {
                             students: C.students.join('、'),
                         },
                         {
-                            option: 'D',
-                            count: D.count,
-                            students: D.students.join('、'),
+                            option: 'B',
+                            count: B.count,
+                            students: B.students.join('、'),
+                        },
+                        {
+                            option: 'A',
+                            count: A.count,
+                            students: A.students.join('、'),
                         },
                     ],
                 };
