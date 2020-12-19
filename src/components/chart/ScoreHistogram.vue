@@ -19,6 +19,10 @@ export default {
         return {
             chartSettings: {
                 color: ['#5BC88F'],
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                },
             },
         };
     },
