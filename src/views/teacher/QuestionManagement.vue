@@ -1,6 +1,6 @@
 <template>
     <back-card
-        class="mx-auto"
+        class="mt-16 mx-auto"
         action-text="返回課程管理"
         @button-click="goTo('/teacher/course-management')"
     >

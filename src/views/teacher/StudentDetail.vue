@@ -1,6 +1,6 @@
 <template>
     <back-card
-        class="mx-auto"
+        class="mt-16 mx-auto"
         action-text="返回學生列表"
         @button-click="goTo('/teacher/student-list')"
     >
