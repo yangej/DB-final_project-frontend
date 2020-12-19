@@ -33,6 +33,10 @@ export default {
                         },
                     },
                 },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                },
             },
         };
     },
