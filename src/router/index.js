@@ -97,6 +97,16 @@ VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch((err) => err);
 };
 
-const router = new VueRouter({ mode: 'history', routes });
+const router = new VueRouter({
+    mode: 'history',
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({ x: 0, y: 0, behavior: 'smooth' });
+            }, 500);
+        });
+    },
+});
 
 export default router;
