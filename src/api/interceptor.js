@@ -4,7 +4,7 @@ import router from '../router';
 export function setInterceptor(axiosInstance) {
     axiosInstance.interceptors.request.use(
         (config) => {
-            const token = localStorage.getItem('token');
+            const token = store.state.user.token;
             if (token) {
                 config.headers['token'] = token;
             }
@@ -29,7 +29,12 @@ export function setInterceptor(axiosInstance) {
                     await router.push('/login');
                 }
             } else {
-                result.token && localStorage.setItem('token', result.token);
+                result.token &&
+                    (await store.dispatch('user/login', {
+                        token: result.token,
+                        role: result.identity,
+                    }));
+                await router.push(`/${result.identity}`);
             }
 
             return result;
