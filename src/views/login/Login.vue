@@ -7,7 +7,6 @@
 <script>
 import LoginCard from '@/components/login/LoginCard.vue';
 import { apiExecutor } from '../../api';
-import { mapActions } from 'vuex';
 
 export default {
     name: 'Login',
@@ -16,19 +15,8 @@ export default {
     },
     methods: {
         async login(values) {
-            const response = await apiExecutor.login(values);
-            const result = response;
-
-            await this.setLoginInfos({
-                token: result.token,
-                role: result.identity,
-            });
-            response.status === 'success' &&
-                (await this.$router.push({ path: `/${result.identity}` }));
+            await apiExecutor.login(values);
         },
-        ...mapActions({
-            setLoginInfos: 'user/login',
-        }),
     },
 };
 </script>

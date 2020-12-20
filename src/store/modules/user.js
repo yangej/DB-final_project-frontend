@@ -28,7 +28,6 @@ const actions = {
         commit('SET_ROLE', role);
     },
     logout: ({ commit }) => {
-        localStorage.removeItem('token');
         commit('REMOVE_TOKEN');
         commit('REMOVE_ROLE');
     },
