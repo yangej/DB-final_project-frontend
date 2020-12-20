@@ -78,7 +78,7 @@ export default {
             return this.falseAnswerCount === 0
                 ? {
                       popupText: '恭喜全對',
-                      imgSrc: '/img/correction.svg',
+                      imgSrc: '/img/cool.svg',
                   }
                 : {
                       popupText: `答錯了 ${this.falseAnswerCount} 題`,
@@ -107,7 +107,6 @@ export default {
                     tempScore += scorePerQues;
                 } else {
                     falseAnswerCount += 1;
-                    console.log(falseAnswerCount);
                 }
             });
 
