@@ -62,6 +62,7 @@ export default {
             isSent: false,
             score: 0,
             questionIds: [],
+            falseAnswerCount: 0,
         };
     },
     computed: {
@@ -73,10 +74,21 @@ export default {
                 ans: this.questions.map((question) => question.studentAnswer),
             };
         },
+        popupOptions() {
+            return this.falseAnswerCount === 0
+                ? {
+                      popupText: '恭喜全對',
+                      imgSrc: '/img/cool.svg',
+                  }
+                : {
+                      popupText: `答錯了 ${this.falseAnswerCount} 題`,
+                      imgSrc: '/img/disturb.svg',
+                  };
+        },
     },
     methods: {
         ...mapActions({
-            updatePopup: 'popup/updatePopup',
+            showPopup: 'popup/updatePopup',
         }),
         goTo(path) {
             this.$router.push(path);
@@ -87,15 +99,19 @@ export default {
         countScore(questions) {
             const total = 100;
             const scorePerQues = total / this.questions.length;
-            let tempScore = 0;
+            let falseAnswerCount = 0,
+                tempScore = 0;
 
-            questions.forEach((question, index) => {
-                question.answer === question.studentAnswer
-                    ? (tempScore += scorePerQues)
-                    : (this.questions[index].showAnalysis = true);
+            questions.forEach((question) => {
+                if (question.answer === question.studentAnswer) {
+                    tempScore += scorePerQues;
+                } else {
+                    falseAnswerCount += 1;
+                }
             });
 
             this.score = Math.floor(tempScore);
+            this.falseAnswerCount = falseAnswerCount;
         },
         hideButton() {
             this.isSent = true;
@@ -104,12 +120,9 @@ export default {
             this.questions.map((question) => (question.showAnalysis = true));
         },
         async send() {
-            this.updatePopup({
-                popupText: '送出成功',
-                imgSrc: '/img/correction.svg',
-            });
             this.countScore(this.questions);
             await apiExecutor.submitAnswers(this.answerRequest);
+            this.showPopup(this.popupOptions);
             this.hideButton();
             this.showAllAnalysis();
         },
