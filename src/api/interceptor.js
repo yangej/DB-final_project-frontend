@@ -29,12 +29,13 @@ export function setInterceptor(axiosInstance) {
                     await router.push('/login');
                 }
             } else {
-                result.token &&
-                    (await store.dispatch('user/login', {
+                if (store.state.user.token === null) {
+                    await store.dispatch('user/login', {
                         token: result.token,
                         role: result.identity,
-                    }));
-                await router.push(`/${result.identity}`);
+                    });
+                    await router.push(`/${result.identity}`);
+                }
             }
 
             return result;
