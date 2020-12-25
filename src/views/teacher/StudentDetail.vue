@@ -47,9 +47,12 @@ export default {
             this.$router.push({ path });
         },
         transformChartData(scores) {
+            const sortedScores = scores.sort((a, b) => {
+                return a.unit - b.unit;
+            });
             return {
                 ...this.chartData,
-                rows: scores.map((unitScore) => {
+                rows: sortedScores.map((unitScore) => {
                     return {
                         unit: `Unit ${unitScore.unit}`,
                         score: unitScore.score,
