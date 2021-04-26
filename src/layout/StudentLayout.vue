@@ -15,7 +15,7 @@ export default {
     components: { CustomNavbar },
     data() {
         return {
-            navItems: [{ name: '課程列表', path: '/student/course-list' }],
+            navItems: [{ name: '課堂回答', path: '/student/course-list' }],
             userRole: 'student',
         };
     },
